@@ -7,16 +7,6 @@ v.P_FLAG=0; % plot flag
 v.L_FLAG=0; % Legend turn on or off
 v.DT = id.DT;
 
-% update parameter
-if id.inputPid
-    v.IP(id.inputPid) =id.inputP;
-end
-
-if id.inputvPid
-    v.NP(id.inputvPid) =id.inputvP;
-end
-
-
 % total time
 v.SIM_TIME     = 240; % min of stimulation phase (phase 2)v.GENOTYPE = id.genotype;
 v.LPS_DOSE = id.dose*v.IP(52);

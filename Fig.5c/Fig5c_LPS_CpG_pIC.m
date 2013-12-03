@@ -1,4 +1,4 @@
-%% wt simulation
+%% wt simulation 
 % 1. low dose, wt
 id.dose = 10; %'1','100' 
 id.DT = 1;

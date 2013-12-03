@@ -4,11 +4,6 @@ id.dose = 10; %'1','100'
 id.DT = 1;
 %addpath('~/Dropbox/matlab/TLR4')
 
-id.inputP  = [];%input.value;%[0,0,0,0];%input;  % input parameters
-id.inputPid = [];%input.id;%[45:47,40];%[1:4, 9:18, 20:27, 35:48, 49:52];
-id.inputvP = [];
-id.inputvPid = [];
-
 id.output ={'NFkBn','TNFnas', 'TNFmRNA','TNFpro','IKK'};
 %'IKK','nfkb','irf'
 
@@ -23,7 +18,7 @@ sim{3} = getSimData(id);
 %
 
 
-%t(9) = .18;%tnf secretion rate 
+%t(9) = .18;%tnf secretion rate , 2.5 fold less in tko
 
 nfkbn     = [sim{1}(1,:);sim{2}(1,:);sim{3}(1,:)];
 tnfNas    = [sim{1}(2,:);sim{2}(2,:);sim{3}(2,:)];
