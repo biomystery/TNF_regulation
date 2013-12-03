@@ -14,16 +14,17 @@ v.INITVALUES = getInit();
 
 % mutant 
 switch id.genotype
-    case 'mko'
-        v.INITVALUES{1}(25)=0; %myd88
-        v.TP(5) = .07;         % NEW mRNA stability
-        v.TP(6) = v.TP(6)*4; % NEW process rate
-    case 'tko'
-        v.INITVALUES{1}(27)=0;
-        v.TP(6) = v.TP(6)*4; % NEW process rate 
-        v.TP(9) = v.TP(9)/2.5; % NEW sec rate 
-    case 'wt'
-        v.IP(24:25) = v.IP(49:50);
+  case 'mko'
+    v.INITVALUES{1}(25)=0; %myd88
+    v.TP(5) = .07;         % NEW mRNA stability
+    v.TP(6) = 0;%v.TP(6)/100; % NEW process rate
+  case 'tko'
+    v.INITVALUES{1}(27)=0;
+    v.TP(6) = 0;%;v.TP(6)/100; % NEW process rate 
+    v.TP(9) = v.TP(9)/2.5; % NEW sec rate 
+  case 'wt'
+    v.IP(24:25) = v.IP(49:50);
+    v.TP(6) = 0;%;v.TP(6)/100; % NEW process rate     
 end
 
 % Run

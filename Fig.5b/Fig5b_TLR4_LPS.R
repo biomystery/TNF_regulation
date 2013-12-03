@@ -11,8 +11,8 @@ sec_exp <- read.csv('../expdata/TNF_secrection.csv')
 
 # read simulation data 
 nfkb_sim <- read.csv('./simData/nfkb_sim.csv')
-nascent_sim <- read.csv('./simData/mRNA_sim.csv')
-mRNA_sim <- read.csv('./simData/prot_sim.csv')
+nascent_sim <- read.csv('./simData/nascent_sim.csv')
+mRNA_sim <- read.csv('./simData/mRNA_sim.csv')
 sec_sim <- read.csv('./simData/sec_sim.csv')
 
 

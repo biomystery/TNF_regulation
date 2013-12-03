@@ -104,4 +104,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  0.388   0.055   0.439 
+  0.404   0.062   0.560 
