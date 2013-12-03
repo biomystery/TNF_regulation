@@ -31,7 +31,7 @@ switch id.genotype
     case 'tko'
         v.INITVALUES{1}(27)=0;
         v.TP(6) = v.TP(6)*4; % NEW process rate 
-        v.TP(9) = v.TP(9)/1.5; % NEW sec rate 
+        v.TP(9) = v.TP(9)/2.5; % NEW sec rate 
     case 'wt'
         v.IP(24:25) = v.IP(49:50);
 end
