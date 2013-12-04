@@ -84,7 +84,7 @@ i(29)  = 0.25;    % IKKK     --> IKKK_off (constitutive), 31
 
 % IKK
 i(30)  = 520;    % IKK_off  --> IKK (IKKK mediated),32
-i(31)  = 5e-5 ;    % IKK_off  --> IKK (constitutive),33
+i(31)  = 5e-5*15 ;    % IKK_off  --> IKK (constitutive),33
 i(32)  = 0.02  ;    % IKK      --> IKK_off (constitutive), 34
 i(33)  = 0.15 ;    % IKK      --> IKK_i (constitutive)  , 35
 i(34)  = 0.02  ;    % IKKi     --> IKK_off (constitutive) , 36

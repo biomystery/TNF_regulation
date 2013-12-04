@@ -212,7 +212,7 @@ function delta = nfkbOde(t,x,ode_options,v)
         flux_rsu_a         = v.NP(1) ;
         flux_rsu_b         = v.NP(2) ;
         flux_rsu_e         = v.NP(3) ;
-        flux_rsu_f         = 0;%v.TP(1) ; %tnf basal transcription (NEW)
+        flux_rsu_f         = v.TP(1) ; %tnf basal transcription (NEW)
         
         flux_rsr_an        = v.NP(4)   * (delayed_nfkbn_a ^ v.NP(7)) ;
         flux_rsr_bn        = v.NP(5)   * (delayed_nfkbn_b ^ v.NP(8)) ;

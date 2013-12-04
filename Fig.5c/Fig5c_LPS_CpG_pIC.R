@@ -3,10 +3,8 @@
 ####
 
 # read experimental data 
-nfkb_exp <- read.csv('../expdata/nfkb.csv')
-nascent_exp <- read.csv('../expdata/nascent.csv')
-mRNA_exp <- read.csv('../expdata/mRNA.csv')
-sec_exp <- read.csv('../expdata/TNF_secrection.csv')
+mRNA_exp <- read.csv('../expdata/mRNA_LPS_CpG_PIC.csv')
+sec_exp <- read.csv('../expdata/elisa_LPS_CpG_PIC.csv')
 
 
 # read simulation data 
@@ -20,53 +18,29 @@ sec_sim <- read.csv('./simData/sec_sim.csv')
 # plot 
 ####
 
-pdf(file='Fig5b_TLR4_LPS.pdf', height=9, width=6, onefile=TRUE, family='Helvetica', paper='letter', pointsize=14) 
+pdf(file='Fig5c.pdf', height=6, width=12, onefile=TRUE, family='Helvetica', paper='letter', pointsize=14) 
 
-layout(matrix(c(5,1,6,2,7,3,8,4), 4, 2, byrow = TRUE))#, respect = TRUE)
+layout(matrix(c(0,1,0,2), 2, 2, byrow = TRUE))#, respect = TRUE)
 
-xlim = c(0,120)
+xlim = c(0,240)
+xat = seq(0,240,60)
 ##
 #exp plot
 ## 
-# nfkb plot
-matplot(nfkb_exp[,1],nfkb_exp[,2:4],type='b',pch=rep(1,3),col=c('black','purple','cyan3'),
-        lty=rep(1,3),xlab='Time (mins)',ylab='NFkB ',xlim=xlim)
-title(main = "Experimental data",col.main='red')
-
-# nascnet plot
-matplot(nascent_exp[,1],nascent_exp[,c(2,4,6)],type='b',pch=rep(1,3),col=c('black','purple','cyan3'),
-        lty=rep(1,3),xlab='Time (mins)',ylab='Nascent ',xlim=xlim)
-
 # mRNA plot
 matplot(mRNA_exp[,1],mRNA_exp[,c(2,4,6)],type='b',pch=rep(1,3),col=c('black','purple','cyan3'),
-        lty=rep(1,3),xlab='Time (mins)',ylab='mRNA ',xlim=xlim)
+        lty=rep(1,3),xlab='Time (mins)',ylab='mRNA ',xlim=xlim,xaxt ='n')
+axis(1,at=xat)
+title(main = "Experimental data",col.main='red')
 
+# elisa plot
+matplot(sec_exp[,1],sec_exp[,2:4],type='b',pch=rep(1,3),col=c('black','purple','cyan3'),
+        lty=rep(1,3),xlab='Time (mins)',ylab='Secreted TNF ',xlim=xlim,xaxt ='n')
+axis(1,at=xat)
 
-# sec exp plot 
-matplot(sec_exp[,1],sec_exp[,c(2,4,6)],type='b',pch=rep(1,3),col=c('black','purple','cyan3'),
-        lty=rep(1,3),xlab='Time (mins)',ylab='secTNF',xlim=xlim)
+legend("topleft",c("LPS","CpG","PIC"),lty=rep(1,3),pch=rep(NA,3),col=c('black','purple','cyan3'),bty="n")
 
-##
-#sim plot
-## 
-# nfkb plot
-matplot(nfkb_sim[,1],nfkb_sim[,2:4],type='l',col=c('black','purple','cyan3'),
-        lty=rep(1,3),xlab='Time (mins)',ylab='NFkB ',xlim=xlim)
-title(main = "Simulation",col.main='red')
-
-# nascnet plot
-matplot(nascent_sim[,1],nascent_sim[,2:4],type='l',col=c('black','purple','cyan3'),
-        lty=rep(1,3),xlab='Time (mins)',ylab='Nascent ',xlim=xlim)
-
-# mRNA plot
-matplot(mRNA_sim[,1],mRNA_sim[,2:4],type='l',col=c('black','purple','cyan3'),
-        lty=rep(1,3),xlab='Time (mins)',ylab='mRNA ',xlim=xlim)
-
-
-# sec exp plot 
-matplot(sec_sim[,1],sec_sim[,2:4],type='l',col=c('black','purple','cyan3'),
-        lty=rep(1,3),xlab='Time (mins)',ylab='secTNF',xlim=xlim)
 
 # end and open the pdf 
 dev.off()
-system('open Fig5b_TLR4_LPS.pdf')
+system('open Fig5c.pdf')
