@@ -117,11 +117,11 @@ i(52) =     633.55; % LPS multiplier
 
 %  tnf part (NEW)
 t(1) = 1e-5;%tnf constitutive txn 
-t(2) = 1;%tnf induced txn 
+t(2) = 10;%tnf induced txn 
 t(3) = 3;%tnf transcription,Hill coefficient
 t(4) = .5;%tnf transcription induction EC50
 t(5) = .02;%tnf transcript deg. max rate ~~~ Could be determined by measurement. 
-t(6) = .02;%tnf nascent process rate 
+t(6) = .02*5;%tnf nascent process rate 
 t(7) = 1;%tnf protein syns rate 
 t(8) = .18;%tnf deg rate 
 t(9) = .18;%tnf secretion rate 

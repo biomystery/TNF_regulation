@@ -27,7 +27,7 @@ tnfPro    = [sim{1}(4,:);sim{2}(4,:);sim{3}(4,:)];
 tnfSec    = cumsum([sim{1}(4,:)*.18;sim{2}(4,:)*.18;sim{3}(4,:)*.18/2.5]');
 IKK    = [sim{1}(5,:);sim{2}(5,:);sim{3}(5,:)];
 %%
-t = 0:240;
+t = 0:120;
 csvwrite('./simData/nfkb_sim.csv',[t;nfkbn]')
 csvwrite('./simData/nascent_sim.csv',[t;tnfNas]')
 csvwrite('./simData/mRNA_sim.csv',[t;tnfmRNA]')

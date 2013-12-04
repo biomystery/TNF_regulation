@@ -66,6 +66,7 @@ matplot(mRNA_sim[,1],mRNA_sim[,2:4],type='l',col=c('black','purple','cyan3'),
 # sec exp plot 
 matplot(sec_sim[,1],sec_sim[,2:4],type='l',col=c('black','purple','cyan3'),
         lty=rep(1,3),xlab='Time (mins)',ylab='secTNF',xlim=xlim)
+legend("topleft",c("wt","mko","tko"),lty=rep(1,3),pch=rep(NA,3),col=c('black','purple','cyan3'),bty="n")
 
 # end and open the pdf 
 dev.off()

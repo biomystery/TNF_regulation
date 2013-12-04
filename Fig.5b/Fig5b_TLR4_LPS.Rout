@@ -40,8 +40,8 @@ package 'stats' in options("defaultPackages") was not found
 > 
 > # read simulation data 
 > nfkb_sim <- read.csv('./simData/nfkb_sim.csv')
-> nascent_sim <- read.csv('./simData/mRNA_sim.csv')
-> mRNA_sim <- read.csv('./simData/prot_sim.csv')
+> nascent_sim <- read.csv('./simData/nascent_sim.csv')
+> mRNA_sim <- read.csv('./simData/mRNA_sim.csv')
 > sec_sim <- read.csv('./simData/sec_sim.csv')
 > 
 > 
@@ -104,4 +104,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  0.404   0.062   0.560 
+  0.401   0.058   0.455 

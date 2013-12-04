@@ -8,7 +8,7 @@ v.L_FLAG=0; % Legend turn on or off
 v.DT = id.DT;
 
 % total time
-v.SIM_TIME     = 240; % min of stimulation phase (phase 2)v.GENOTYPE = id.genotype;
+v.SIM_TIME     = 120; % min of stimulation phase (phase 2)v.GENOTYPE = id.genotype;
 v.LPS_DOSE = id.dose*v.IP(52);
 v.INITVALUES = getInit();
 
@@ -17,14 +17,13 @@ switch id.genotype
   case 'mko'
     v.INITVALUES{1}(25)=0; %myd88
     v.TP(5) = .07;         % NEW mRNA stability
-    v.TP(6) = 0;%v.TP(6)/100; % NEW process rate
+    v.TP(6) = v.TP(6)/3; % NEW process rate
   case 'tko'
     v.INITVALUES{1}(27)=0;
-    v.TP(6) = 0;%;v.TP(6)/100; % NEW process rate 
+    v.TP(6) = v.TP(6)/3; % NEW process rate 
     v.TP(9) = v.TP(9)/2.5; % NEW sec rate 
   case 'wt'
     v.IP(24:25) = v.IP(49:50);
-    v.TP(6) = 0;%;v.TP(6)/100; % NEW process rate     
 end
 
 % Run
