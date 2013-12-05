@@ -188,8 +188,8 @@ i(95)   = i(22);  % TRIF activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TNF part
 %  tnf part (NEW)
-t(1) = 0;%1e-5;%tnf constitutive txn 
-t(2) = 0;%10;%tnf induced txn 
+t(1) = 1e-5;%tnf constitutive txn 
+t(2) = 10;%tnf induced txn 
 t(3) = 3;%tnf transcription,Hill coefficient
 t(4) = .5;%tnf transcription induction EC50
 t(5) = .02;%tnf transcript deg. max rate ~~~ Could be determined by measurement. 

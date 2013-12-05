@@ -23,9 +23,8 @@ elseif strcmp(id.stimuli,'PIC')
 end
 
 % TNF feedback: controlled by TNF receptor  
-v.flag_noTnfFeedback = id.flag_noTnfFeedback;
 if id.flag_noTnfFeedback
-    v.IP(54) = 0; 
+    
 end
 
 v.INITVALUES = getInit();
