@@ -15,7 +15,7 @@ v.BASAL_VALUES = [];
 while ~static % Iterate through Phase 1 until equilibrium is reached
     options = odeset('RelTol', 1e-4);
     [t1, r1] = ode15s('nfkbOde', [v.START_TIME 0], initial_values,options,v);
-     plot(t1,r1(:,44));hold on ; 
+    %plot(t1,r1(:,44));hold on ; 
     % Evaluate results and return true if at equilibrium
     
     if (evaluatePhase1(r1, threshold)) % values have converged
