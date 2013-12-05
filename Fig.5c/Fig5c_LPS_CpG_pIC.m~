@@ -7,7 +7,7 @@ id.sim_time = 120;
 
 %% run the 3 stimulis one by one 
 stimuli.name= {'LPS','CpG','PIC','TNF'};
-stimuli.dose= [10,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml 
+stimuli.dose= [10,100,50,]; % 10ng/ml, 100nM, 50 ug/ml 
 colors = {'k'};
 
 for j = 4:4

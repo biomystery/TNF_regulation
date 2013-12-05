@@ -209,7 +209,7 @@ i(34)  = .1;%0.2  ;    % IKK      --> IKK_off (constitutive) 0.02
 i(35)  = .15;%0.02 ;    % IKK      --> IKK_i (constitutive)  0.02
 i(36)  = .02;%0.2  ;    % IKKi     --> IKK_off (constitutive) 0.2
 i(38)  = 1 ; 
-%% the TNFR parameters
+
 %----- IKK Activation Module -----
 i(56)   = 0.0154; % pd_m_tnf 45' half life of exogenous TNF
 

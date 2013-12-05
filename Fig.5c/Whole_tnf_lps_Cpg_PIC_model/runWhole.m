@@ -22,3 +22,21 @@ for j = 1:3
         title(id.output{i})
     end
 end
+%% export the data 
+nfkbn     = [sim{1}(1,:);sim{2}(1,:);sim{3}(1,:)];
+tnfNas    = [sim{1}(2,:);sim{2}(2,:);sim{3}(2,:)];
+tnfmRNA   = [sim{1}(3,:);sim{2}(3,:);sim{3}(3,:)];
+tnfPro    = [sim{1}(4,:);sim{2}(4,:);sim{3}(4,:)];
+tnfSec    = cumsum([sim{1}(4,:)*.18;sim{2}(4,:)*.18;sim{3}(4,:)*.18/1.5]);
+IKK    = [sim{1}(5,:);sim{2}(5,:);sim{3}(5,:)];
+
+t = 0:240;
+csvwrite('./simData/nfkb_sim.csv',[t;nfkbn]')
+csvwrite('./simData/nascent_sim.csv',[t;tnfNas]')
+csvwrite('./simData/mRNA_sim.csv',[t;tnfmRNA]')
+csvwrite('./simData/prot_sim.csv',[t;tnfPro]')
+csvwrite('./simData/sec_sim.csv',[t;tnfSec]')
+
+
+%% R code to draw the result. 
+!R CMD BATCH Fig5c_LPS_CpG_pIC.R

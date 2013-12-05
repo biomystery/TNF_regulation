@@ -2,14 +2,27 @@ function simData=getSimData(id)
 %% construct and passing parameters
 v=struct;
 [v.NP,v.IP,v.TP] = getRateParams();%wt
-v.D_FLAG=0; % display flag
+v.D_FLAG=1; % display flag
 v.P_FLAG=0; % plot flag
 v.L_FLAG=0; % Legend turn on or off
 v.DT = id.DT;
 
 % total time
-v.SIM_TIME     = 120; % min of stimulation phase (phase 2)v.GENOTYPE = id.genotype;
-v.LPS_DOSE = id.dose*v.IP(52);
+v.SIM_TIME     = id.sim_time; % min of stimulation phase (phase
+                              % 2)v.GENOTYPE = id.genotype;
+v.STIMULI  = id.stimuli; 
+% Stimuli
+if strcmp(id.stimuli,'LPS')
+    v.DOSE = id.dose*v.IP(52);
+elseif strcmp(id.stimuli,'TNF')
+    v.DOSE = id.dose*(1.96e-4);      % 1.96e-4uM= 1ng/mL TNF;
+elseif strcmp(id.stimuli,'CpG')
+    v.DOSE = id.dose; % no transmition yet
+elseif strcmp(id.stimuli,'PIC')
+    v.DOSE = id.dose; % no transmistion yet
+end
+
+
 v.INITVALUES = getInit();
 
 % mutant 
