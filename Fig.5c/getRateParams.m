@@ -174,8 +174,8 @@ i(85)   = 2e-7;   % TLR9 synthesis (txn, tsl, localization)
 i(86)   = 0.0058; % TLR9 --> deg  -- 120' halflife
 i(87)   = .6;     % CpG +  TLR9 -> CpGTLR9, affinity : 186 nM ± 35 nM
 i(88)   = 0.1116; % CpGTLR9 -> CpG +  TLR9 1 × 104 M-1 s-1, 6 mins half-life
-i(89)   = i(18);  %MyD88 activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
-i(90)   = i(20);  %    /((TLR4LPS)^3 + (v.IP(37))^3)  * MyD88;
+i(89)   = i(18)*1000;  %MyD88 activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
+i(90)   = i(20)/100;  %    /((TLR4LPS)^3 + (v.IP(37))^3)  * MyD88;
 
 %% the PIC-TLR3 parameters
 % TLR9rm metabolism (synthesis and degradation)

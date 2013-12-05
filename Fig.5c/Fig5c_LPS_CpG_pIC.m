@@ -1,7 +1,7 @@
 %% basic setting for fig5c
 id.genotype = 'wt';
 id.flag_noTnfFeedback = true;%true or false
-id.output ={'MyD88s','TRIFs','IKKK','IKK','NFkBn','TNFmRNA','TNF'};
+id.output ={'PICTLR3','CpGTLR9','MyD88s','TRIFs','IKKK','IKK','NFkBn','TNFmRNA','TNF'};
 id.DT = 1;
 id.sim_time = 360;
 
@@ -10,7 +10,7 @@ stimuli.name= {'LPS','CpG','PIC','TNF'};
 stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml 
 colors = {'k'};
 
-for j = 1:4
+for j = 2:3
     id.stimuli = stimuli.name{j}; %LPS, CpG, PIC,TNF. 
     id.dose = stimuli.dose(j); %'1','100' 
     

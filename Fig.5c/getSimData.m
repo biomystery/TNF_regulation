@@ -17,9 +17,9 @@ if strcmp(id.stimuli,'LPS')
 elseif strcmp(id.stimuli,'TNF')
     v.DOSE = id.dose*(1.96e-4);      % 1.96e-4uM= 1ng/mL TNF;
 elseif strcmp(id.stimuli,'CpG')
-    v.DOSE = id.dose; % no transmition yet
+    v.DOSE = id.dose*v.IP(52)*100; % no transmition yet
 elseif strcmp(id.stimuli,'PIC')
-    v.DOSE = id.dose; % no transmistion yet
+    v.DOSE = id.dose*v.IP(52); % no transmistion yet
 end
 
 
