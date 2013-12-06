@@ -12,6 +12,11 @@ threshold   = 1;        % Max % difference used by evaluate_phase1()
 initial_values = v.INITVALUES{1};
 v.BASAL_VALUES = [];
 
+if  ~v.flag_noTnfFeedback
+    tmp = v.IP(54);
+    v.IP(54) = 0; 
+end
+
 while ~static % Iterate through Phase 1 until equilibrium is reached
     options = odeset('RelTol', 1e-4);
     [t1, r1] = ode15s('nfkbOde', [v.START_TIME 0], initial_values,options,v);
@@ -34,6 +39,10 @@ while ~static % Iterate through Phase 1 until equilibrium is reached
     end
 end
 disp(count)
+
+if  ~v.flag_noTnfFeedback
+    v.IP(54) = tmp; 
+end
 %% subsubroutine static
     function static = evaluatePhase1(results,threshold)
         % threshold= percentage

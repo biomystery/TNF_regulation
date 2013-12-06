@@ -1,16 +1,18 @@
 %% basic setting for fig5c
 id.genotype = 'wt';
 id.flag_noTnfFeedback = true;%true or false
-id.output ={'PIC','CpG','PICTLR3','CpGTLR9','MyD88s','TRIFs','IKKK','IKK','NFkBn','TNFmRNA','TNF'};
+%id.output ={'PIC','CpG','PICTLR3','CpGTLR9','MyD88s',...
+%    'TRIFs','IKKK','IKK','NFkBn','TNFmRNA','TNF'};
+id.output ={'TNFmRNA','TNFpro'};
 id.DT = 1;
-id.sim_time = 360;
+id.sim_time = 240;
 
 %% run the 3 stimulis one by one 
 stimuli.name= {'LPS','CpG','PIC','TNF'};
 stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml 
 colors = {'k'};
 
-for j = 1:1
+for j = 1:3
     id.stimuli = stimuli.name{j}; %LPS, CpG, PIC,TNF. 
     id.dose = stimuli.dose(j); %'1','100' 
     
@@ -20,7 +22,21 @@ for j = 1:1
     for i=1:size(id.output,2)
         subplot(4,3,i);
         plot(sim{j}(i,:),colors{mod(i,1)+1},'linewidth',2);
-        xlim([0 360]);set(gca,'xtick',0:60:360);
+        xlim([0 id.sim_time]);set(gca,'xtick',0:60:360);
         title(id.output{i})
     end
 end
+
+%%
+
+tnfmRNA   = [sim{1}(1,:);sim{2}(1,:);sim{3}(1,:)];
+tnfPro    = [sim{1}(2,:);sim{2}(2,:);sim{3}(2,:)];
+tnfSec    = cumsum([sim{1}(2,:)*.18;sim{2}(2,:)*.18;sim{3}(2,:)*.18/2.5]');
+
+
+t = 0:id.sim_time;
+csvwrite('./simData/mRNA_sim.csv',[t;tnfmRNA]')
+csvwrite('./simData/sec_sim.csv',[t;tnfSec']')
+
+% end
+!R CMD BATCH Fig5c_LPS_CpG_pIC.R

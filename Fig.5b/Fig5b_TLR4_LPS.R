@@ -20,7 +20,7 @@ sec_sim <- read.csv('./simData/sec_sim.csv')
 # plot 
 ####
 
-pdf(file='Fig5b_TLR4_LPS.pdf', height=9, width=6, onefile=TRUE, family='Helvetica', paper='letter', pointsize=14) 
+pdf(file='Fig5b_TLR4_LPS.pdf', height=9, width=8, onefile=TRUE, family='Helvetica', paper='letter', pointsize=14) 
 
 layout(matrix(c(5,1,6,2,7,3,8,4), 4, 2, byrow = TRUE))#, respect = TRUE)
 

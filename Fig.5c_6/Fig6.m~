@@ -1,0 +1,48 @@
+%% basic setting for fig5c
+id.genotype = 'wt';
+%id.output ={'PIC','CpG','PICTLR3','CpGTLR9','MyD88s',...
+%    'TRIFs','IKKK','IKK','NFkBn','TNFmRNA','TNF'};
+id.output ={'NFkBn'};
+id.DT = 1;
+id.sim_time = 480;
+
+
+stimuli.name= {'LPS','CpG','PIC','TNF'};
+stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml 
+%% run the 3 stimulis one by one without feedback
+id.flag_noTnfFeedback = true;%true or false
+
+for j = 1:3
+    id.stimuli = stimuli.name{j}; %LPS, CpG, PIC,TNF. 
+    id.dose = stimuli.dose(j); %'1','100' 
+
+    sim{j} = getSimData(id);    
+
+end
+
+
+%% run the 3 stimulis one by one with feedback
+id.flag_noTnfFeedback = false;%true or false
+
+for j = 1:3
+    id.stimuli = stimuli.name{j}; %LPS, CpG, PIC,TNF. 
+    id.dose = stimuli.dose(j); %'1','100' 
+
+    sim{j+3} = getSimData(id);    
+
+end
+
+
+%%
+
+nfkbn   = [sim{1}(1,:);sim{2}(1,:);sim{3}(1,:)];
+tnfPro    = [sim{1}(2,:);sim{2}(2,:);sim{3}(2,:)];
+tnfSec    = cumsum([sim{1}(2,:)*.18;sim{2}(2,:)*.18;sim{3}(2,:)*.18/2.5]');
+
+
+t = 0:id.sim_time;
+csvwrite('./simData/nfkb_sim.csv',[t;tnfmRNA]')
+csvwrite('./simData/sec_sim.csv',[t;tnfSec']')
+
+% end
+!R CMD BATCH Fig6.R

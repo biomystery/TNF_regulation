@@ -1,0 +1,50 @@
+####
+# read 
+####
+
+# read simulation data 
+nfkb_sim_nofeedback <- read.csv('./simData/nfkb_sim_nofeedback.csv')
+nfkb_sim_feedback <- read.csv('./simData/nfkb_sim_feedback.csv')
+
+
+####  
+# plot 
+####
+
+pdf(file='Fig6.pdf', height=3, width=12, onefile=TRUE, family='Helvetica', paper='letter', pointsize=14) 
+
+layout(matrix(c(1,2,3), 1, 3, byrow = TRUE))#, respect = TRUE)
+
+xlim = c(0,480)
+xat = seq(0,480,60)
+
+##
+#exp plot
+## 
+# LPS plot
+matplot(nfkb_sim_feedback[,1],cbind(nfkb_sim_feedback[,2],nfkb_sim_nofeedback[,2]),
+        type='l',pch=rep(1,3),col=c('black','red'),
+        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn ',xlim=xlim,xaxt ='n')
+axis(1,at=xat)
+title(main = "LPS stimulation")
+
+# CpG plot
+matplot(nfkb_sim_feedback[,1],cbind(nfkb_sim_feedback[,3],nfkb_sim_nofeedback[,3]),
+        type='l',pch=rep(1,3),col=c('black','red'),
+        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn ',xlim=xlim,xaxt ='n')
+axis(1,at=xat)
+title(main = "CpG stimulation")
+
+# PIC plot
+matplot(nfkb_sim_feedback[,1],cbind(nfkb_sim_feedback[,4],nfkb_sim_nofeedback[,4]),
+        type='l',pch=rep(1,3),col=c('black','red'),
+        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn ',xlim=xlim,xaxt ='n')
+axis(1,at=xat)
+title(main = "PIC stimulation")
+
+legend("topright",c("w TNF feedback","wo TNF feedback"),lty=c(1,2),pch=rep(NA,2),col=c('black','red'),bty="n")
+
+
+# end and open the pdf 
+dev.off()
+system('open Fig6.pdf')
