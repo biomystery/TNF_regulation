@@ -7,8 +7,8 @@
 interp_method = 'linear'
 
 # input data 
-nascent <- read.csv('nascent.csv')
-halflife <- read.csv('halflife.csv')#,row.names=1)
+nascent <- read.csv('../expdata/nascent.csv')
+halflife <- read.csv('../expdata/halflife.csv')#,row.names=1)
 kdeg_all <- log(2)/halflife
 
 mRNA_predict <- read.csv('mRNA_all2.csv',header=F,
@@ -59,7 +59,7 @@ mtext('mRNA\'= nascent(t) - kdeg* mRNA'
 #plot()
 
 # mRNA exp data
-mRNA_expdata <- read.csv('mRNA.csv')
+mRNA_expdata <- read.csv('../expdata/mRNA.csv')
 
 plot(mRNA_expdata$Time_mins,mRNA_expdata$wt_fold,type="b",xlab='Time (mins)'
      ,ylab='mRNA',main='Experimental data (output)',xlim=c(0,120),ylim=c(0,200))
