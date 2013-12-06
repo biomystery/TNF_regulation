@@ -35,8 +35,8 @@ end
 
 %%
 
-nfkbn_nofeedback  = [sim{1}(1,:);sim{2}(1,:);sim{3}(1,:)];
-nfkbn_feedback    = [sim{4}(1,:);sim{5}(1,:);sim{6}(1,:)];
+nfkbn_nofeedback  = [sim{1}(1,:)/sim{1}(1,1);sim{2}(1,:)/sim{2}(1,1);sim{3}(1,:)/sim{3}(1,1)];
+nfkbn_feedback    = [sim{4}(1,:)/sim{4}(1,1);sim{5}(1,:)/sim{5}(1,1);sim{6}(1,:)/sim{6}(1,1)];
 
 t = 0:id.sim_time;
 csvwrite('./simData/nfkb_sim_nofeedback.csv',[t;nfkbn_nofeedback]')

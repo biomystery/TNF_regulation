@@ -26,21 +26,21 @@ xat = seq(0,480,60)
 # LPS plot
 matplot(nfkb_sim_feedback[,1],cbind(nfkb_sim_feedback[,2],nfkb_sim_nofeedback[,2]),
         type='l',pch=rep(1,3),col=c('black','red'),
-        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn ',xlim=xlim,xaxt ='n')
+        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn (fold)',xlim=xlim,xaxt ='n')
 axis(1,at=xat)
 title(main = "LPS stimulation")
 
 # CpG plot
 matplot(nfkb_sim_feedback[,1],cbind(nfkb_sim_feedback[,3],nfkb_sim_nofeedback[,3]),
         type='l',pch=rep(1,3),col=c('black','red'),
-        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn ',xlim=xlim,xaxt ='n')
+        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn (fold)',xlim=xlim,xaxt ='n')
 axis(1,at=xat)
 title(main = "CpG stimulation")
 
 # PIC plot
 matplot(nfkb_sim_feedback[,1],cbind(nfkb_sim_feedback[,4],nfkb_sim_nofeedback[,4]),
         type='l',pch=rep(1,3),col=c('black','red'),
-        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn ',xlim=xlim,xaxt ='n')
+        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn (fold)',xlim=xlim,xaxt ='n')
 axis(1,at=xat)
 title(main = "PIC stimulation")
 
@@ -53,7 +53,7 @@ legend("topright",c("w TNF feedback","wo TNF feedback"),lty=c(1,2),pch=rep(NA,2)
 nfkb_lps_exp_fold = t(rbind(nfkb_lps_exp[,2]/nfkb_lps_exp[1,2],nfkb_lps_exp[,3]/nfkb_lps_exp[1,3]))
 matplot(nfkb_lps_exp[,1],nfkb_lps_exp_fold,
         type='b',pch=rep(1,3),col=c('black','red'),
-        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn (fold) ',xlim=xlim,xaxt ='n')
+        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn (fold)',xlim=xlim,xaxt ='n')
 axis(1,at=xat)
 title(main = "LPS stimulation")
 
