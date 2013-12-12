@@ -1,5 +1,6 @@
 % read data from R 
-nfkb_exp = csvread('nfkb_input.csv',1,0);
+addpath('../src/')
+nfkb_exp = csvread('../expdata/nfkb.csv',1,0);
 k = [.15 .1 .1]*4; % wt, mko, tko
 kdeg = [.02 .02 .07]; % wt, mko, tko 
 yinit_all = zeros(2,3);
