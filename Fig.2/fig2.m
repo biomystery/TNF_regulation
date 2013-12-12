@@ -49,3 +49,4 @@ end
 !R CMD BATCH fig2.R
 !rm *.Ro* 
 !rm *.Rh*
+!rm *.RD*

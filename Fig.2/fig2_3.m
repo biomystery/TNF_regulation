@@ -1,21 +1,36 @@
 % read data from R 
 addpath('../src/')
 nfkb_exp = csvread('../expdata/nfkb.csv',1,0);
-k = [.15 .1 .1]*4; % wt, mko, tko
+
+plot_flag = 0; 
+
+pars = getParams(); % wt parameters
+
+k_pr_all = [pars('k_pr') pars('k_pr')/pars('pr_fold') pars('k_pr')/pars('pr_fold')]; 
 kdeg = [.02 .02 .07]; % wt, mko, tko 
+
 yinit_all = zeros(2,3);
-yinit_all(1,:) = 27/6* nfkb_exp(1,2:end).^3./(nfkb_exp(1,2:end).^3+.5^3)./ ...
-    k;
-yinit_all(2,:) = yinit_all(1,:).*k./kdeg;
+yinit_all(1,:) = pars('V_tr')* nfkb_exp(1,2:end).^pars('n')./(nfkb_exp(1, ...
+                                                  2:end).^pars('n')+pars('Km_tr')^pars('n'))./k_pr_all;
+yinit_all(2,:) = yinit_all(1,:).*k_pr_all/kdeg(3);
 
 times = 0:.1:120;%nascent_all(:,1);
 
+% wt 
 [t,wt]= ode15s(@ode23,times,yinit_all(:,1),[],[],nfkb_exp(:,1:2), ...
-                    k(1),kdeg(1));
+               pars);
+% mko 
+pars('k_pr') = k_pr_all(2);
+pars('kdeg_m') = kdeg(2)
 [~,mko]= ode15s(@ode23,times,yinit_all(:,2),[],[],nfkb_exp(:,[1 ...
-                    3]),k(2),kdeg(2));
+                    3]),pars);
+
+% tko 
+pars('k_pr') = k_pr_all(3);
+pars('kdeg_m') = kdeg(3)
+
 [~,tko]= ode15s(@ode23,times,yinit_all(:,3),[],[],nfkb_exp(:,[1 ...
-                    4]),k(3),kdeg(3));
+                    4]),pars);
 
 figure
 subplot 211
