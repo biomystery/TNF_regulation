@@ -21,7 +21,7 @@ matplot(nascent_predict[,1],nascent_predict[,2:4],type='l',col=c('black','purple
         lty=rep(1,3),xlab='Time (mins)',ylab='Nascent (sim) ',xlim=c(0,120),
         ylim= ylims,main='Same RNA process in knockouts & wt')
 
-legend("bottom",c("wt","mko","tko"),lty=rep(1,3),pch=rep(NA,3),col=c('black','purple','cyan3'),bty="n")
+legend("bottomright",c("wt","mko","tko"),lty=rep(1,3),pch=rep(NA,3),col=c('black','purple','cyan3'),bty="n")
 
 # plot 4: higher wt process
 matplot(nascent_predict_different_pr[,1],nascent_predict_different_pr[,2:4],type='l',col=c('black','purple','cyan3'),
