@@ -1,8 +1,9 @@
+
 %% wt simulation
 % 1. low dose, wt
 id.dose = 10; %'1','100' 
 id.DT = 1;
-%addpath('~/Dropbox/matlab/TLR4')
+addpath('../src')
 
 id.output ={'NFkBn','TNFnas', 'TNFmRNA','TNFpro','IKK'};
 %'IKK','nfkb','irf'

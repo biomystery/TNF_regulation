@@ -1,0 +1,113 @@
+
+R version 3.0.0 (2013-04-03) -- "Masked Marvel"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/Library/Frameworks/R.framework/Versions/3.0/Resources/library/stats/libs/stats.so':
+  dlopen(/Library/Frameworks/R.framework/Versions/3.0/Resources/library/stats/libs/stats.so, 6): Symbol not found: __gfortran_pow_r8_i4
+  Referenced from: /Library/Frameworks/R.framework/Versions/3.0/Resources/lib/libRlapack.dylib
+  Expected in: /Applications/MATLAB_R2012b.app/sys/os/maci64/libgfortran.2.dylib
+ in /Library/Frameworks/R.framework/Versions/3.0/Resources/lib/libRlapack.dylib
+During startup - Warning message:
+package 'stats' in options("defaultPackages") was not found 
+> ####
+> # read 
+> ####
+> 
+> # read experimental data 
+> nfkb_exp <- read.csv('../expdata/nfkb.csv')
+> nascent_exp <- read.csv('../expdata/nascent.csv')
+> mRNA_exp <- read.csv('../expdata/mRNA.csv')
+> sec_exp <- read.csv('../expdata/TNF_secrection.csv')
+> 
+> 
+> # read simulation data 
+> nfkb_sim <- read.csv('./simData/nfkb_sim.csv')
+> nascent_sim <- read.csv('./simData/nascent_sim.csv')
+> mRNA_sim <- read.csv('./simData/mRNA_sim.csv')
+> sec_sim <- read.csv('./simData/sec_sim.csv')
+> 
+> 
+> ####  
+> # plot 
+> ####
+> 
+> pdf(file='Fig5b_TLR4_LPS.pdf', height=12, width=8, onefile=TRUE, family='Helvetica', paper='letter', pointsize=14) 
+> 
+> layout(matrix(c(5,1,6,2,7,3,4,8), 4, 2, byrow = TRUE))#, FFFR)
+> 
+> xlim = c(0,120)
+> colors <- c('steelblue4','skyblue1','steelblue3')
+> pchs <- c(18,17,15)
+> ##
+> #exp plot
+> ## 
+> # nfkb plot
+> matplot(nfkb_exp[,1],nfkb_exp[,2:4],type='o',pch=pchs,col=colors,
++         lty=rep(1,3),xlab='Time (mins)',ylab='NFkB (exp)',xlim=xlim,lwd=2)
+> title(main = "Experimental data",col.main='red')
+> 
+> # nascnet plot
+> matplot(nascent_exp[,1],nascent_exp[,c(2,4,6)],type='o',pch=pchs,col=colors,
++         lty=rep(1,3),xlab='Time (mins)',ylab='Nascent (exp)',xlim=xlim,lwd=2)
+> 
+> # mRNA plot
+> matplot(mRNA_exp[,1],mRNA_exp[,c(2,4,6)],type='o',pch=pchs,col=colors,
++         lty=rep(1,3),xlab='Time (mins)',ylab='mRNA (exp)',xlim=xlim,lwd=2)
+> 
+> 
+> # sec exp plot 
+> matplot(sec_exp[,1],sec_exp[,c(2,4,6)],type='o',pch=pchs,col=colors,
++         lty=rep(1,3),xlab='Time (mins)',ylab='secTNF (exp)',xlim=xlim,lwd=2)
+> legend("topleft",c("wt","mko","tko"),lty=rep(1,3),pch=pchs,col=colors,bty="n")
+> 
+> ##
+> #sim plot
+> ## 
+> # nfkb plot
+> matplot(nfkb_sim[,1],nfkb_sim[,2:4],type='l',col=colors,
++         lty=rep(1,3),xlab='Time (mins)',ylab='NFkB (sim)',xlim=xlim,lwd=2)
+> 
+> title(main = "Simulation",col.main='red')
+> 
+> # nascnet plot
+> matplot(nascent_sim[,1],nascent_sim[,2:4],type='l',col=colors,
++         lty=rep(1,3),xlab='Time (mins)',ylab='Nascent (sim)',xlim=xlim,lwd=2)
+> 
+> # mRNA plot
+> matplot(mRNA_sim[,1],mRNA_sim[,2:4],type='l',col=colors,
++         lty=rep(1,3),xlab='Time (mins)',ylab='mRNA (sim)',xlim=xlim,lwd=2)
+> 
+> #axis(2,at = c(0,.7,1.4)*.8,labels = c(0,40,80))
+> # sec exp plot 
+> matplot(sec_sim[,1],sec_sim[,2:4],type='l',col=colors,
++         lty=rep(1,3),xlab='Time (mins)',ylab='secTNF (sim)',xlim=xlim,lwd=2,yaxt = 'n')
+> legend("topleft",c("wt","mko","tko"),lty=rep(1,3),pch=rep(NA,3),col=colors,bty="n")
+> axis(2,at = c(0,16,32,48),labels = c(0,400,800,1200))
+> 
+> # end and open the pdf 
+> dev.off()
+null device 
+          1 
+> system('open Fig5b_TLR4_LPS.pdf')
+> 
+> proc.time()
+   user  system elapsed 
+  0.413   0.060   0.505 

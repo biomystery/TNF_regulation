@@ -6,7 +6,7 @@ plot_flag = 0;
 
 pars = getParams(); % wt parameters
 
-k_pr_all = [pars('k_pr') pars('k_pr')/1.5 pars('k_pr')/1.5]; 
+k_pr_all = [pars('V_pr') pars('V_pr')/1.5 pars('V_pr')/1.5]; 
 kdeg = [.02 .02 .07]; % wt, mko, tko 
 
 yinit_all = zeros(2,3);
@@ -17,19 +17,20 @@ yinit_all(2,:) = yinit_all(1,:).*k_pr_all/kdeg(3);
 times = 0:.1:120;%nascent_all(:,1);
 
 % wt 
-[t,wt]= ode15s(@ode23,times,yinit_all(:,1),[],[],nfkb_exp(:,1:2), ...
+[t,wt]= ode15s(@ode23_new,times,yinit_all(:,1),[],[],nfkb_exp(:,1:2), ...
                pars);
+
 % mko 
-pars('k_pr') = k_pr_all(2);
+pars('V_pr') = k_pr_all(2);
 pars('kdeg_m') = kdeg(2);
-[~,mko]= ode15s(@ode23,times,yinit_all(:,2),[],[],nfkb_exp(:,[1 ...
+[~,mko]= ode15s(@ode23_new,times,yinit_all(:,2),[],[],nfkb_exp(:,[1 ...
                     3]),pars);
 
 % tko 
-pars('k_pr') = k_pr_all(3);
+pars('V_pr') = k_pr_all(3);
 pars('kdeg_m') = kdeg(3);
 
-[~,tko]= ode15s(@ode23,times,yinit_all(:,3),[],[],nfkb_exp(:,[1 ...
+[~,tko]= ode15s(@ode23_new,times,yinit_all(:,3),[],[],nfkb_exp(:,[1 ...
                     4]),pars);
 
 figure
