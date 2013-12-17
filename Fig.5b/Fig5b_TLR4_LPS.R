@@ -22,7 +22,7 @@ sec_sim <- read.csv('./simData/sec_sim.csv')
 
 pdf(file='Fig5b_TLR4_LPS.pdf', height=12, width=8, onefile=TRUE, family='Helvetica', paper='letter', pointsize=14) 
 
-layout(matrix(c(5,1,6,2,7,3,4,8), 4, 2, byrow = TRUE))#, FFFR)
+layout(matrix(c(5,1,6,2,7,3,8,4), 4, 2, byrow = TRUE))#, FFFR)
 
 xlim = c(0,120)
 colors <- c('steelblue4','skyblue1','steelblue3')

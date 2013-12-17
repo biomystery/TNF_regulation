@@ -508,6 +508,7 @@ function delta = nfkbOde(t,x,ode_options,v)
     flux_d_tlr9             = v.IP(86) * TLR9;
     flux_b_cpg_tlr9         = v.IP(87) * CpG * TLR9;
     flux_d_cpg_tlr9         = v.IP(88) * CpGTLR9;
+    flux_deg_cpgtlr9        = v.IP(88) * CpGTLR9;    
     flux_a_MyD88_cpgtlr9    = v.IP(89) * CpGTLR9^3/(CpGTLR9^3 + v.IP(90)^3) * MyD88;
 
 
@@ -963,6 +964,8 @@ function delta = nfkbOde(t,x,ode_options,v)
     delta_TLR9      = delta_TLR9    + flux_d_cpg_tlr9;
     delta_CpG       = delta_CpG     + flux_d_cpg_tlr9;
     delta_CpGTLR9   = delta_CpGTLR9 - flux_d_cpg_tlr9;
+    
+    delta_CpGTLR9   = delta_CpGTLR9 - flux_deg_cpgtlr9;
 
     delta_MyD88s    = delta_MyD88s  + flux_a_MyD88_cpgtlr9;
     delta_MyD88     = delta_MyD88   - flux_a_MyD88_cpgtlr9;

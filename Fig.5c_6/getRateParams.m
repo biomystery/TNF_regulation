@@ -170,18 +170,18 @@ i(84)  = i(83);  % IKKK_off --> IKKK (C1tnf mediated)
 
 %% the CPG-TLR9 parameters
 % TLR9rm metabolism (synthesis and degradation)
-i(85)   = 2e-7;   % TLR9 synthesis (txn, tsl, localization)
+i(85)   = 2e-7*500;   % TLR9 synthesis (txn, tsl, localization)
 i(86)   = 0.0058; % TLR9 --> deg  -- 120' halflife
 i(87)   = .6;     % CpG +  TLR9 -> CpGTLR9, affinity : 186 nM ± 35 nM
 i(88)   = 0.1116; % CpGTLR9 -> CpG +  TLR9 1 × 104 M-1 s-1, 6 mins half-life
-i(89)   = i(18)*1000;  %MyD88 activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
-i(90)   = i(20)/100;  %    /((TLR4LPS)^3 + (v.IP(37))^3)  * MyD88;
+i(89)   = i(18)*10;  %MyD88 activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
+i(90)   = i(20);  %    /((TLR4LPS)^3 + (v.IP(37))^3)  * MyD88;
 
 %% the PIC-TLR3 parameters
-% TLR9rm metabolism (synthesis and degradation)
+% TLR3 metabolism (synthesis and degradation)
 i(91)   = 2e-7;   % TLR3 synthesis (txn, tsl, localization)
 i(92)   = 0.0058; % TLR3 --> deg  -- 120' halflife
-i(93)   = .6;     % PIC +  TLR3 -> CpGTLR3, affinity : 186 nM ± 35 nM
+i(93)   = .6/100;     % PIC +  TLR3 -> CpGTLR3, affinity : 186 nM ± 35 nM
 i(94)   = 0.1116; % CpGTLR3 -> CpG +  TLR3 1 × 104 M-1 s-1, 6 mins half-life
 i(95)   = i(22);  % TRIF activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
 
@@ -189,13 +189,13 @@ i(95)   = i(22);  % TRIF activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)
 % TNF part
 %  tnf part (NEW)
 t(1) = 1e-5;%tnf constitutive txn 
-t(2) = 10;%tnf induced txn 
+t(2) = 10/10;%tnf induced txn 
 t(3) = 3;%tnf transcription,Hill coefficient
-t(4) = .5;%tnf transcription induction EC50
+t(4) = .01;%tnf transcription induction EC50
 t(5) = .02;%tnf transcript deg. max rate ~~~ Could be determined by measurement. 
-t(6) = .02*5;%tnf nascent process rate 
-t(7) = 1;%tnf protein syns rate 
-t(8) = .18;%tnf deg rate 
-t(9) = .18;%tnf secretion rate 
+t(6) = .6;%tnf nascent process rate 
+t(7) = .06;%tnf protein syns rate 
+t(8) = 5.8e-2;%tnf deg rate 
+t(9) = 5.8e-2;%tnf secretion rate 
 
 end

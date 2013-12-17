@@ -2,7 +2,7 @@ function simData=getSimData(id)
 %% construct and passing parameters
 v=struct;
 [v.NP,v.IP,v.TP] = getRateParams();%wt
-v.D_FLAG=1; % display flag
+v.D_FLAG=0; % display flag
 v.P_FLAG=0; % plot flag
 v.L_FLAG=0; % Legend turn on or off
 v.DT = id.DT;
@@ -19,7 +19,7 @@ elseif strcmp(id.stimuli,'TNF')
 elseif strcmp(id.stimuli,'CpG')
     v.DOSE = id.dose*(1.96e-4); % no transmition yet
 elseif strcmp(id.stimuli,'PIC')
-    v.DOSE = id.dose*(1.96e-4); % no transmistion yet
+    v.DOSE = id.dose*(1.96e-4)*1000*1000; % no transmistion yet
 end
 
 % TNF feedback: controlled by TNF receptor  
