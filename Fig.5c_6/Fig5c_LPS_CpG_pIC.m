@@ -14,7 +14,7 @@ stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml
 colors = {'k'};
 
 
-for j = 3:3
+for j = 1:3
     id.stimuli = stimuli.name{j}; %LPS, CpG, PIC,TNF. 
     id.dose = stimuli.dose(j); %'1','100' 
     

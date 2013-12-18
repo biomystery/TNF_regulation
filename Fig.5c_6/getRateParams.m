@@ -165,7 +165,8 @@ i(81)  = i(69);  % C1tnf    --> C1 + tnf
 i(82)  = i(67);  % C1 + tnf --> C1tnf
 
 % IKKK
-i(83)  = 500;    % IKKK_off --> IKKK (C1 mediated)?500
+
+i(83)  = 500/500*10;    % IKKK_off --> IKKK (C1 mediated)?500
 i(84)  = i(83);  % IKKK_off --> IKKK (C1tnf mediated)
 
 %% the CPG-TLR9 parameters
