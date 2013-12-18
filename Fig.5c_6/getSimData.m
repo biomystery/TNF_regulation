@@ -18,8 +18,12 @@ elseif strcmp(id.stimuli,'TNF')
     v.DOSE = id.dose*(1.96e-4);      % 1.96e-4uM= 1ng/mL TNF;
 elseif strcmp(id.stimuli,'CpG')
     v.DOSE = id.dose*(1.96e-4); % no transmition yet
+    v.TP(5) = .07;         % NEW mRNA stability
+    v.TP(6) = v.TP(6)/3; % NEW process rate 
+    v.TP(9) = v.TP(9)/2.5; % NEW sec rate 
 elseif strcmp(id.stimuli,'PIC')
-    v.DOSE = id.dose*(1.96e-4)*1000*1000; % no transmistion yet
+    v.DOSE = id.dose*(1.96e-4); % no transmistion yet
+    v.TP(6) = v.TP(6)/3; % NEW process rate    
 end
 
 % TNF feedback: controlled by TNF receptor  
@@ -32,12 +36,12 @@ v.INITVALUES = getInit();
 
 % mutant 
 switch id.genotype
-  case 'mko'
+  case 'mko' %PIC
     v.INITVALUES{1}(25)=0; %myd88
-    v.TP(5) = .07;         % NEW mRNA stability
     v.TP(6) = v.TP(6)/3; % NEW process rate
-  case 'tko'
+  case 'tko' % CpG
     v.INITVALUES{1}(27)=0;
+    v.TP(5) = .07;         % NEW mRNA stability
     v.TP(6) = v.TP(6)/3; % NEW process rate 
     v.TP(9) = v.TP(9)/2.5; % NEW sec rate 
   case 'wt'

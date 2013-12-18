@@ -517,6 +517,7 @@ function delta = nfkbOde(t,x,ode_options,v)
     flux_d_tlr3             = v.IP(92) * TLR3;
     flux_b_pic_tlr3         = v.IP(93) * PIC * TLR3;
     flux_d_pic_tlr3         = v.IP(94) * PICTLR3;
+    flux_deg_pic_tlr3       = v.IP(94) * PICTLR3;    
     flux_a_TRIF_pictlr3     = v.IP(95) * TRIF * PICTLR3;
 
 
@@ -981,7 +982,8 @@ function delta = nfkbOde(t,x,ode_options,v)
     delta_TLR3      = delta_TLR3    + flux_d_pic_tlr3;
     delta_PIC       = delta_PIC     + flux_d_pic_tlr3;
     delta_PICTLR3   = delta_PICTLR3 - flux_d_pic_tlr3;
-
+    delta_PICTLR3   = delta_PICTLR3 - flux_deg_pic_tlr3;
+    
     delta_TRIFs    = delta_TRIFs  + flux_a_TRIF_pictlr3;
     delta_TRIF     = delta_TRIF   - flux_a_TRIF_pictlr3;
 
