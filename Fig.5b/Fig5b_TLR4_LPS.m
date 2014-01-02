@@ -4,19 +4,26 @@
 id.dose = 10; %'1','100' 
 id.DT = 1;
 addpath('../src')
-
+id.sim_time = 120
 id.output ={'NFkBn','TNFnas', 'TNFmRNA','TNFpro','IKK'};
 %'IKK','nfkb','irf'
-
-id.genotype = 'wt';
-sim{1} = getSimData(id);
-
-id.genotype = 'mko';
-sim{2} = getSimData(id);
-
-id.genotype = 'tko';
-sim{3} = getSimData(id);
-%
+genotypes ={'wt','mko','tko'};
+plot_flag = 1;
+for j = 1:3
+    id.genotype = genotypes{j};
+    sim{j} = getSimData(id);
+    
+    % show the result 
+    if plot_flag 
+        figure('position',[680   419   217*4   559/3*4])
+        for i=1:size(id.output,2)
+            subplot(4,3,i);
+            plot(sim{j}(i,:),'k','linewidth',2);
+            xlim([0 id.sim_time]);set(gca,'xtick',0:60:360);
+            title(id.output{i})
+        end
+    end
+end
 
 
 %t(9) = .18;%tnf secretion rate , 2.5 fold less in tko

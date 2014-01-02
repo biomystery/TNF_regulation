@@ -180,11 +180,11 @@ i(90)   = i(20);  %    /((TLR4LPS)^3 + (v.IP(37))^3)  * MyD88;
 
 %% the PIC-TLR3 parameters
 % TLR3 metabolism (synthesis and degradation)
-i(91)   = 2e-7*5;   % TLR3 synthesis (txn, tsl, localization)
+i(91)   = 2e-7*500;   % TLR3 synthesis (txn, tsl, localization)
 i(92)   = 0.0058; % TLR3 --> deg  -- 120' halflife
 i(93)   = .6;     % PIC +  TLR3 -> CpGTLR3, affinity : 186 nM ± 35 nM
-i(94)   = 0.1116; % CpGTLR3 -> CpG +  TLR3 1 × 104 M-1 s-1, 6 mins half-life
-i(95)   = i(22);  % TRIF activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
+i(94)   = 0.1116*10; % CpGTLR3 -> CpG +  TLR3 1 × 104 M-1 s-1, 6 mins half-life
+i(95)   = i(22)/10;  % TRIF activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TNF part

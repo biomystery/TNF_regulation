@@ -15,7 +15,7 @@ nfkb_sim_feedback <- read.csv('./simData/nfkb_sim_feedback.csv',header=F)
 
 pdf(file='Fig6.pdf', height=6, width=6, onefile=TRUE, family='Helvetica', paper='letter', pointsize=14) 
 
-layout(matrix(c(1,2,3,4), 2, 2, byrow = TRUE))#, respect = TRUE)
+layout(matrix(c(1,2,3,4,5,0), 3, 2, byrow = TRUE))#, respect = TRUE)
 
 xlim = c(0,480)
 xat = seq(0,480,60)
@@ -63,6 +63,12 @@ axis(1,at=xat)
 title(main = "CpG stimulation (exp)",col.main='red')
 legend("bottom",c("wt","tnf ko"),lty=c(1,2),pch=rep(pchs[1],2),col=rep(colors[2],2),bty="n")
 
+# PIC plot
+matplot(nfkb_sim_feedback[,1],cbind(nfkb_sim_feedback[,4],nfkb_sim_nofeedback[,4]),
+        type='l',pch=rep(1,3),col=rep(colors[2],2),lwd=2,
+        lty=c(1,2),xlab='Time (mins)',ylab='NFkBn (sim)',xlim=xlim,xaxt ='n')
+axis(1,at=xat)
+title(main = "PIC stimulation (sim)")
 
 # end and open the pdf 
 dev.off()

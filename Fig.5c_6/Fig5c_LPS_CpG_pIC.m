@@ -1,10 +1,10 @@
 close all
 %% basic setting for fig5c
 id.genotype = 'wt';
-id.flag_noTnfFeedback = true;%true or false
+id.flag_noTnfFeedback = false;%true or false
                              %id.output ={'PIC','CpG','PICTLR3','CpGTLR9','MyD88s',...
                              %    'TRIFs','IKKK','IKK','NFkBn','TNFmRNA','TNF'};
-id.output ={'TNFmRNA','TNFpro','NFkBn','IKK','MyD88s','TRIFs','CpG','CpGTLR9'};
+id.output ={'TNFmRNA','TNFpro','NFkBn','IKK','MyD88s','TRIFs','CpG','CpGTLR9','PIC','PICTLR3'};
 id.DT = 1;
 id.sim_time = 240;
 plot_flag = 1 ;
@@ -14,7 +14,7 @@ stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml
 colors = {'k'};
 
 
-for j = 1:3
+for j = 3:3
     id.stimuli = stimuli.name{j}; %LPS, CpG, PIC,TNF. 
     id.dose = stimuli.dose(j); %'1','100' 
     
@@ -48,3 +48,5 @@ csvwrite('./simData/sec_sim.csv',[t;tnfSec']')
 !rm *.Rout
 %!rm *.RD* 
 %!rm *.Rhi*
+
+Fig6

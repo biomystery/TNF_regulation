@@ -12,7 +12,7 @@ layout(matrix(c(0,1,1,0,2,2,3,3,0,4,4,0),3,4,byrow=T))
 #layout(matrix(c(1,2),2,2,byrow=T))
 colors <- c('steelblue4','skyblue1','steelblue3')
 pchs <- c(18,17,15)
-ylims <- c(0,ceiling(max(nascent_exp[,-1])))
+ylims <- c(0,ceiling(max(nascent_exp[,-1]))+5)
 
 # plot 1: input nkfb
 matplot(nfkb_exp[,1],nfkb_exp[,2:4],type='o',pch=pchs,col=colors,lwd=2,
@@ -33,11 +33,17 @@ matplot(nascent_predict_different_pr[,1],nascent_predict_different_pr[,2:4],type
 # legend("topleft",c("wt","mko","tko"),lty=rep(1,3),pch=rep(NA,3),col=colors,bty="n")
 
 # plot 4: Output exp
+#install.packages('plotrix')
+library(plotrix)
 matplot(nascent_exp[,1],nascent_exp[,c(2,4,6)],type='o',pch=pchs,col=colors,
         lty=rep(1,3),xlab='Time (mins)',ylab='Nascent (Exp)',xlim=c(0,120),
         ylim= ylims,lwd=2)#,main='Experimental data (Output)')
 legend('bottom',c("wt","mko","tko"),lty=rep(1,3),pch=pchs,col=colors,bty="n",cex=.8)
 
+plotCI(x=rep(nascent_exp[,1],3),y=as.vector(nascent_exp[,c(2,4,6)]),
+       uiw=as.vector(nascent_exp[,c(3,5,7)]),
+       col=colors,each=nrow(nascent_exp[,c(2,4,6)]),
+       add=T)
 
 dev.off()
 system('open fig2.pdf')
