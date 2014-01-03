@@ -11,7 +11,7 @@ for i =1:2
     pars('pr_fold') = pr_fold(i);
     k_pr_all = [pars('k_pr') pars('k_pr')/pars('pr_fold') ...
                 pars('k_pr')/pars('pr_fold')]; 
-    if i ==2
+    if i ==1
         k_pr_all = [pars('k_pr') pars('k_pr')/0.8 ...
                 pars('k_pr')/1.4]; 
     end

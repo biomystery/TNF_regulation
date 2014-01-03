@@ -37,12 +37,14 @@ matplot(nascent_predict_different_pr[,1],nascent_predict_different_pr[,2:4],type
         ylim= ylims,xlim=c(0,120),lwd=2,main='1.5 fold less process in knockouts')
 # legend("topleft",c("wt","mko","tko"),lty=rep(1,3),pch=rep(NA,3),col=colors,bty="n")
 
+matpoints(nascent_exp[,1],nascent_exp[,c(2,4,6)],pch=pchs, col=colors)
+
 # plot 4: Output exp
 #install.packages('plotrix')
 library(plotrix)
 matplot(nascent_exp[,1],nascent_exp[,c(2,4,6)],type='o',pch=pchs,col=colors,
         lty=rep(1,3),xlab='Time (mins)',ylab='Nascent (Exp)',xlim=c(0,120),
-        ylim= ylims,lwd=2)#,main='Experimental data (Output)')
+        ylim= ylims,lwd=2, add =F)#,main='Experimental data (Output)')
 legend('bottom',c("wt","mko","tko"),lty=rep(1,3),pch=pchs,col=colors,bty="n",cex=.8)
 
 #ref : https://stat.ethz.ch/pipermail/r-help/2009-April/195287.html

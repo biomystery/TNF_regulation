@@ -36,7 +36,7 @@ pars('kdeg_m') = kdeg_m(3);
                     4]),pars);
 
 % write the data into the file 
-csvwrite(filenames{i},[t nascent_wt nascent_mko nascent_tko])
+%csvwrite(filenames{i},[t nascent_wt nascent_mko nascent_tko])
 
 figure
 plot(t,wt(:,1),'k')

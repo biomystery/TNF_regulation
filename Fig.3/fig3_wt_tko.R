@@ -21,7 +21,7 @@ mRNA_predict_tko <- read.csv('mRNA_all_tko.csv',header=F,
 
 # draw input data 
 #par(mfrow=c(2,3))
-pdf(file='fig3_wt_mko.pdf', height=6, width=12, onefile=TRUE,  paper='letter', pointsize=14) 
+pdf(file='fig3_wt_mko.pdf', height=6, width=8, onefile=TRUE,  paper='letter', pointsize=14) 
 
 layout(matrix(c(1,2,3,0,4,0),2,3,byrow=T))
 colors <- c('steelblue4','skyblue1','steelblue3')
