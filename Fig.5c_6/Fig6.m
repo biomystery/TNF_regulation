@@ -9,6 +9,7 @@ id.sim_time = 480;
 
 stimuli.name= {'LPS','CpG','PIC','TNF'};
 stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml 
+
 %% run the 3 stimulis one by one without feedback
 id.flag_noTnfFeedback = true;%true or false
 
