@@ -1,16 +1,21 @@
 % read data from R 
 addpath('../src/')
 nfkb_exp = csvread('../expdata/nfkb.csv',1,0);
-
 plot_flag = 0; 
-
 pars = getParams(); % wt parameters
 pr_fold = [pars('pr_fold') 1];
 k_pr = pars('k_pr');
 filenames = {'./simData/different_pr.csv','./simData/same_pr.csv'};
+
 for i =1:2
     pars('pr_fold') = pr_fold(i);
-    k_pr_all = [pars('k_pr') pars('k_pr')/pars('pr_fold') pars('k_pr')/pars('pr_fold')]; 
+    k_pr_all = [pars('k_pr') pars('k_pr')/pars('pr_fold') ...
+                pars('k_pr')/pars('pr_fold')]; 
+    if i ==2
+        k_pr_all = [pars('k_pr') pars('k_pr')/0.8 ...
+                pars('k_pr')/1.4]; 
+    end
+    
     yinit_all = pars('V_tr')* nfkb_exp(1,2:end).^pars('n')./(nfkb_exp(1, ...
                                                       2:end).^pars('n')+pars('Km_tr')^pars('n'))./k_pr_all;
 
@@ -48,5 +53,5 @@ end
 % run R
 !R CMD BATCH fig2.R
 !rm *.Ro* 
-!rm *.Rh*
-!rm *.RD*
+%!rm *.Rh*
+%!rm *.RD*

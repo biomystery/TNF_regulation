@@ -5,6 +5,11 @@ nascent_predict<-read.csv('./simData/same_pr.csv',header=F,
 nascent_exp <- read.csv('../expdata/nascent.csv')
 nfkb_exp <- read.csv('../expdata/nfkb.csv')
 
+nrmsd <- read.csv('./simData/nrmsd.csv')
+
+
+############################################################
+# plot fig2.pdf
 
 pdf(file='fig2.pdf', height=12, width=8.5, onefile=TRUE, family='Helvetica', paper='letter', pointsize=18) 
 
@@ -40,10 +45,11 @@ matplot(nascent_exp[,1],nascent_exp[,c(2,4,6)],type='o',pch=pchs,col=colors,
         ylim= ylims,lwd=2)#,main='Experimental data (Output)')
 legend('bottom',c("wt","mko","tko"),lty=rep(1,3),pch=pchs,col=colors,bty="n",cex=.8)
 
-plotCI(x=rep(nascent_exp[,1],3),y=as.vector(nascent_exp[,c(2,4,6)]),
+#ref : https://stat.ethz.ch/pipermail/r-help/2009-April/195287.html
+plotCI(x=rep(nascent_exp[,1],1),y=as.vector(nascent_exp[,c(2,4,6)]),
        uiw=as.vector(nascent_exp[,c(3,5,7)]),
-       col=colors,each=nrow(nascent_exp[,c(2,4,6)]),
-       add=T)
+       col=colors,add=T)
 
 dev.off()
 system('open fig2.pdf')
+
