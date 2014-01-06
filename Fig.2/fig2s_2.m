@@ -34,7 +34,7 @@ save ./simData/fig2s.mat
 
 % plot 
 if plot_flag
-    imagesc(pr_fold,pr_fold,score)
+    imagesc(kd,kpr,score)
 end 
 
 % save data 
