@@ -6,22 +6,27 @@ plot_flag = 1;
 pars = getParams(); % wt parameters
 
 
-N = 30;
-pr_fold = linspace(0.1,3,N);
-score = zeros(N,N);
+N = 10;
+M = 21;
+%pr_fold = linspace(0.1,3,N);
+kd = linspace(0.1,1,N);
+kpr = linspace(-2,0,M);
+kpr = 10.^kpr; 
+
+score = zeros(N,M);
 
 
 for i =1:N
-    for j = 1:N
-        input_pars(1) = pr_fold(i);
-        input_pars(2) = pr_fold(j);
+    for j = 1:M
+        input_pars(1) = kd(i);
+        input_pars(2) = kpr(j);
 
         % cal score
         residues = calScoreCustom(input_pars,nfkb_exp,expData);
         
         score(i,j) = sqrt(sum(residues.^2)/numel(residues));
         
-        disp(((i-1)*N+j)/(N*N))
+        disp(((i-1)*N+j)/(N*M))
     end
 end
 
