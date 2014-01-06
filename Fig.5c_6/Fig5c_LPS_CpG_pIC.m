@@ -12,7 +12,8 @@ id.flag_noTnfFeedback = true;%true or false
 id.output ={'TNFmRNA','TNFpro','NFkBn','IKK','MyD88s','TRIFs','CpG','CpGTLR9','PIC','PICTLR3'};
 id.DT = 1;
 id.sim_time = 240;
-plot_flag = 1 ;
+plot_flag = 0 ;
+
 %% run the 3 stimulis one by one 
 stimuli.name= {'LPS','CpG','PIC','TNF'};
 stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml 
@@ -43,11 +44,9 @@ tnfmRNA   = [sim{1}(1,:);sim{2}(1,:);sim{3}(1,:)];
 tnfPro    = [sim{1}(2,:);sim{2}(2,:);sim{3}(2,:)];
 tnfSec    = cumsum([sim{1}(2,:)*tp(9);sim{2}(2,:)*tp(9)/2.5;sim{3}(2,:)*tp(9)]');
 
-
 t = 0:id.sim_time;
 csvwrite('./simData/mRNA_sim.csv',[t;tnfmRNA]')
 csvwrite('./simData/sec_sim.csv',[t;tnfSec']')
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,6 +90,6 @@ csvwrite('./simData/sec_sim_feedback.csv',[t;tnfSec']')
 
 !R CMD BATCH Fig5c_LPS_CpG_pIC.R
 !rm *.Rout
-%!rm *.RD* 
-%!rm *.Rhi*
+!rm *.RD* 
+!rm *.Rhi*
 

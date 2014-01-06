@@ -65,7 +65,7 @@ legend("bottom",c("wt","tnf ko"),lty=c(1,2),pch=rep(pchs[1],2),col=rep(colors[2]
 
 # PIC plot
 matplot(nfkb_sim_feedback[,1],cbind(nfkb_sim_feedback[,4],nfkb_sim_nofeedback[,4]),
-        type='l',pch=rep(1,3),col=rep(colors[2],2),lwd=2,
+        type='l',pch=rep(1,3),col=rep(colors[3],2),lwd=2,
         lty=c(1,2),xlab='Time (mins)',ylab='NFkBn (sim)',xlim=xlim,xaxt ='n')
 axis(1,at=xat)
 title(main = "PIC stimulation (sim)")
