@@ -20,7 +20,7 @@ csvwrite('proTNF_all_both.csv',[t proTNF_wt proTNF_mko proTNF_tko])
 
 % secretion 
 ksec = kdeg;
-sec_regulator = 2.5; % 2.5
+sec_regulator = 5; % 2.5
                      %
 
 yinit_all = mRNA_all(1,[2,4,6])/(kdeg + ksec);
