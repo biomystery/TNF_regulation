@@ -20,7 +20,7 @@ elseif strcmp(id.stimuli,'CpG')
     v.DOSE = id.dose*(1.96e-4); % no transmition yet
     v.TP(5) = .07;         % NEW mRNA stability
     v.TP(6) = v.TP(6)/3; % NEW process rate 
-    v.TP(9) = v.TP(9)/2.5; % NEW sec rate 
+    v.TP(9) = v.TP(9)/1.5; % NEW sec rate 
 elseif strcmp(id.stimuli,'PIC')
     v.DOSE = id.dose*(1.96e-4); % no transmistion yet
     v.TP(6) = v.TP(6)/3; % NEW process rate    
