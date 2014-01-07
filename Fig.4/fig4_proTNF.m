@@ -1,5 +1,5 @@
 % read data from R 
-mRNA_all = csvread('mRNA.csv',1,0);
+mRNA_all = csvread('../expdata/mRNA.csv',1,0);
 mRNA_all(:,2:end) = mRNA_all(:,2:end)/9/15*8.4; % tl_rate
 kdeg = 5.8e-3*10; % from Werner et al. 2008
 tl_regulator  = 1.5; %  fold less in tko or 1.5
@@ -34,7 +34,7 @@ yinit_all = mRNA_all(1,[2,4,6])/(kdeg + ksec);
 [~,TNF_tko]= ode15s(@ode2,times,yinit_all(3),[],[],mRNA_all(:,[1 ...
                     6]),kdeg,ksec);
 
-csvwrite('sec_all.csv',[t TNF_wt*ksec TNF_mko*ksec TNF_tko*ksec])
+csvwrite('sec_all.csv',[t cumsum([TNF_wt*ksec TNF_mko*ksec TNF_tko*ksec])]);
 
 
 %end

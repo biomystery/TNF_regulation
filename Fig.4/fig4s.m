@@ -1,10 +1,13 @@
 % read data from R 
-mRNA_all = csvread('../expdata/mRNA.csv',1,0);
+mRNA_all = csvread('mRNA.csv',1,0);
+sec_exp = csvread('../expdata/TNF_secrection.csv',1,0)
+pro_exp = csvread('../expdata/combineTNF.csv',1,0)
+
+
 mRNA_all(:,2:end) = mRNA_all(:,2:end)/9/15*8.4; % tl_rate
 kdeg = 5.8e-3*10; % from Werner et al. 2008
 tl_regulator  = 1.5; %  fold less in tko or 1.5
-mRNA_all(:,[6]) = mRNA_all(:,[6])/tl_regulator; % only TKO has slower
-                                                % translation rate 
+mRNA_all(:,[2,4,6]) = mRNA_all(:,[2,4,6])/tl_regulator;
 
 yinit_all = mRNA_all(1,[2,4,6])/kdeg;
 
@@ -16,7 +19,7 @@ times = 0:.1:max(mRNA_all(:,1));%mRNA_all(:,1);
 [~,proTNF_tko]= ode15s(@ode,times,yinit_all(3),[],[],mRNA_all(:,[1 ...
                     6]),kdeg);
 
-csvwrite('proTNF_all_tl.csv',[t proTNF_wt proTNF_mko proTNF_tko])
+csvwrite('proTNF_all.csv',[t proTNF_wt proTNF_mko proTNF_tko])
 
 
 % secretion 
@@ -35,8 +38,13 @@ yinit_all = mRNA_all(1,[2,4,6])/(kdeg + ksec);
 [~,TNF_tko]= ode15s(@ode2,times,yinit_all(3),[],[],mRNA_all(:,[1 ...
                     6]),kdeg,ksec);
 
-csvwrite('sec_all_tl.csv',[t cumsum([TNF_wt*ksec TNF_mko*ksec TNF_tko*ksec])]);
+csvwrite('sec_all.csv',[t TNF_wt*ksec TNF_mko*ksec TNF_tko*ksec])
 
+%
+%figure
+%subplot 211
+%plot(t,
+%subplot 212 
 
 %end
 %!R CMD BATCH Fig4_single.R
