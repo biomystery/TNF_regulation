@@ -11,10 +11,10 @@ for i =1:2
     pars('pr_fold') = pr_fold(i);
     k_pr_all = [pars('k_pr') pars('k_pr')/pars('pr_fold') ...
                 pars('k_pr')/pars('pr_fold')]; 
-    if i ==1
-        k_pr_all = [pars('k_pr') pars('k_pr')/0.8 ...
-                pars('k_pr')/1.4]; 
-    end
+    %    if i ==1
+    %    k_pr_all = [pars('k_pr') pars('k_pr')/0.8 ...
+    %            pars('k_pr')/1.4]; 
+    %end
     
     yinit_all = pars('V_tr')* nfkb_exp(1,2:end).^pars('n')./(nfkb_exp(1, ...
                                                       2:end).^pars('n')+pars('Km_tr')^pars('n'))./k_pr_all;
