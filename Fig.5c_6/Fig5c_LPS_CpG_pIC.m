@@ -76,7 +76,7 @@ end
 k_sec = tp(9); %pic condtion, sec rate 
 tnfmRNA   = [sim{1}(1,:);sim{2}(1,:);sim{3}(1,:)];
 tnfPro    = [sim{1}(2,:);sim{2}(2,:);sim{3}(2,:)];
-tnfSec    = cumsum([sim{1}(2,:)*tp(9);sim{2}(2,:)*tp(9)/1;sim{3}(2,:)*tp(9)]');
+tnfSec    = cumsum([sim{1}(2,:)*tp(9);sim{2}(2,:)*tp(9)/1m;sim{3}(2,:)*tp(9)]');
 
 
 t = 0:id.sim_time;

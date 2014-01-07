@@ -1,6 +1,7 @@
 % path & exp data 
 addpath('../src/')
 nascent_exp = csvread('../expdata/nascent.csv',1,0);
+expData = csvread('../expdata/mRNA.csv',1,0);
 nascent_exp(:,[3,5,7])=[]; % delete the std cols 
 
 % plot options 
@@ -8,10 +9,11 @@ plot_flag = 1;
 
 % pars
 pars = getParams(); % wt parameters
-k_pr_all = [pars('k_pr') pars('k_pr')/6 pars('k_pr')]; 
+pars('k_pr') = 0.9;
+k_pr_all = [pars('k_pr') pars('k_pr')/1 pars('k_pr')/1]; 
 kdeg_m = [.02 .02 .07]; % wt, mko, tko 
 k_pr = pars('k_pr');
-kdeg_m_mko = [0.07, 0.02]
+kdeg_m_mko = [0.07, 0.02];
 
 % initial conditions
 yinit = nascent_exp(1,2:end) .* k_pr_all/kdeg_m(3);
@@ -39,8 +41,8 @@ pars('kdeg_m') = kdeg_m(3);
 %csvwrite(filenames{i},[t nascent_wt nascent_mko nascent_tko])
 
 figure
-plot(t,wt(:,1),'k')
+plot(t,[wt(:,1) mko(:,1) tko(:,1)]/wt(1))
 hold on 
-plot(t,tko(:,1),'c')
-plot(t,mko(:,1),'Color', [0.5 0 0.5])
+plot(expData(:,1),expData(:,[2,4,6]),'o')
+xlim([0 120])
 hold off
