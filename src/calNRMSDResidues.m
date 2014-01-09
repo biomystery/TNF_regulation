@@ -8,6 +8,9 @@ function  [rmsd_residues,nrmsd_residues] = calNRMSDResidues(simData,expData,sigm
 %      simData --- rows: wt, mko, tko; cols: timepoint1, timepoint2...
 %      expData --- rows: wt, wt_std, mko, mko_std, tko, tko_std;
 %      cols same as simData
+% update 1/8/14
+%      1. normalize the data to max first and then fit. 
+   
 
     % default value for sigmaRatioTh
     if nargin <3
