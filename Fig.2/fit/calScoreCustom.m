@@ -15,6 +15,7 @@ pars('Km_tr') = input_pars(2);
 pars('k_pr') = input_pars(3);
 pr_fold_mko = input_pars(4);
 pr_fold_tko = input_pars(5);
+scale = input_pars(6)
 
 k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold_mko pars('k_pr')/pr_fold_tko]; 
 yinit_all = pars('V_tr')* nfkb_exp(1,2:end).^pars('n')./(nfkb_exp(1, ...
