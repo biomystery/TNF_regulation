@@ -39,6 +39,7 @@ pars('k_pr') = k_pr_all(3);
 
 % get date
 simData = [nascent_wt nascent_mko nascent_tko];
+
 % rescaling:
 simData = simData/max(simData(:));
 expData(:,2:end) = expData(:,2:end)/max(max(expData(:,2:end)));
