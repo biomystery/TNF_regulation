@@ -1,8 +1,8 @@
-function rmsd_residues = calScore(input_pars)
+function nrmsd_residues = calScore(input_pars)
 
 % expdata
 nfkb_exp = csvread('../../expdata/nfkb.csv',1,0);
-expData =  csvread('../../expdata/nascent2.csv',1,0);
+expData =  csvread('../../expdata/nascent.csv',1,0);
 
 % params
 plot_flag = 1;
@@ -10,11 +10,11 @@ pars = getParams(); % wt parameters
 
 input_pars = 10.^input_pars;
 
-pars('V_tr') = input_pars(1);
-pars('Km_tr') = input_pars(2);
-pars('k_pr') = input_pars(3);
-pr_fold_mko = input_pars(4);
-pr_fold_tko = input_pars(5);
+pars('V_tr') = 1;%input_pars(1);
+pars('Km_tr') = input_pars(1);
+pars('k_pr') = input_pars(2);
+pr_fold_mko = input_pars(3);
+pr_fold_tko = input_pars(4);
 %scale = input_pars(6)
 
 k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold_mko pars('k_pr')/pr_fold_tko]; 
@@ -56,6 +56,9 @@ end
 
 % calculate score 
 simData = simData((expData(:,1))*10+1,:);
-[rmsd_residues, nrmsd_residues] = calNRMSDResidues(simData,expData(:,2:end));
+[rmsd_residues, nrmsd_residues] = calNRMSDResidues(simData,expData(:, ...
+                                                  2:end));
+
+
 
 

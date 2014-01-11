@@ -5,6 +5,7 @@ plot_flag = 0;
 pars = getParams(); % wt parameters
 pr_fold = [pars('pr_fold') 1];
 k_pr = pars('k_pr');
+pars('V_tr') = 1;
 filenames = {'./simData/different_pr.csv','./simData/same_pr.csv'};
 
 for i =1:2

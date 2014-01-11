@@ -34,7 +34,7 @@ ylims <- c(0,ceiling(max(nascent_exp[,-1]))+5)
 # plot 3: lower process in knockouts. 
 matplot(nascent_predict_different_pr[,1],nascent_predict_different_pr[,2:4],type='l',col=colors,
         lty=rep(1,3),xlab='Time (mins)',ylab='Nascent (AU) ',
-        ylim= ylims,xlim=c(0,120),lwd=2,main='Simulation')
+        xlim=c(0,120),lwd=2,main='Simulation')
 # legend("topleft",c("wt","mko","tko"),lty=rep(1,3),pch=rep(NA,3),col=colors,bty="n")
 
 #matpoints(nascent_exp[,1],nascent_exp[,c(2,4,6)],pch=pchs, col=colors)
@@ -49,9 +49,9 @@ title(main='Experiment',col.main = 'red')
 legend('bottom',c("wt","mko","tko"),lty=rep(1,3),pch=pchs,col=colors,bty="n",cex=.8)
 
 #ref : https://stat.ethz.ch/pipermail/r-help/2009-April/195287.html
-#plotCI(x=rep(nascent_exp[,1],1),y=as.vector(nascent_exp[,c(2,4,6)]),
-#       uiw=as.vector(nascent_exp[,c(3,5,7)]),
-#       col=colors,add=T)
+plotCI(x=rep(nascent_exp[,1],3),y=as.vector(nascent_exp[,c(2,4,6)]),
+       uiw=as.vector(nascent_exp[,c(3,5,7)]),
+       col=colors,add=T)
 
 dev.off()
 system('open fig2.pdf')
