@@ -10,12 +10,13 @@ pars = getParams(); % wt parameters
 
 input_pars = 10.^input_pars;
 
-pars('V_tr') = input_pars(1);
-pars('Km_tr') = input_pars(2);
-pars('k_pr') = input_pars(3);
-pr_fold_mko = input_pars(4);
-pr_fold_tko = input_pars(5);
-scale = input_pars(6)
+pars('V_tr') = 1; 
+pars('Km_tr') = input_pars(1);
+pars('k_pr') = input_pars(2);
+pr_fold_mko = input_pars(3);
+pr_fold_tko = input_pars(4);
+pars('n') = input_pars(5); 
+
 
 k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold_mko pars('k_pr')/pr_fold_tko]; 
 yinit_all = pars('V_tr')* nfkb_exp(1,2:end).^pars('n')./(nfkb_exp(1, ...
@@ -67,5 +68,5 @@ residues(5) = (max_val(2) / max_val(3) - 1.08)/0.15; % peak_mko /peak_tko
 residues(6) = (simData(601,1)/mean([simData(601,2),simData(601,3)])- ...
                .83)/.18;
 residues(7) = (simData(1201,1)/mean([simData(1201,2),simData(1201,3)])-.78)/.29;
-%residues(8) = (simData(1201,1)-simData(601,1) + 6)/1;
+residues(8) = (simData(601,1) / simData(1201,1) -2.22)/0.94;
 %residues(9) = (max_val(3) -25)/2; 
