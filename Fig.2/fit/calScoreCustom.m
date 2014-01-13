@@ -58,14 +58,14 @@ simData = simData;
 [max_val, max_ind] = max(simData);
 max_time = (max_ind-1)*0.1;
 
-residues(1) = (max_time(1) - 30)/10 ; % wt peak time 
-residues(2) = (max_time(2) - 60)/20 ; % mko peak time 
-residues(3) = (max_time(3) - 30)/10 ; % tko peak time 
+residues(1) = (max_time(1) - 30)/5 ; % wt peak time 
+residues(2) = (max_time(2) - 60)/10 ; % mko peak time 
+residues(3) = (max_time(3) - 30)/5 ; % tko peak time 
 
-residues(4) = (max_val(3) / max_val(1) - 1.25)/0.1; % peak_wt / peak_mko 
-residues(5) = (max_val(2) / max_val(3) - 1.05)/0.01; % peak_mko /peak_tko 
+residues(4) = (max_val(3) / max_val(1) - 1.45)/0.42; % peak_tko / peak_wt 
+residues(5) = (max_val(2) / max_val(3) - 1.08)/0.15; % peak_mko /peak_tko 
 residues(6) = (simData(601,1)/mean([simData(601,2),simData(601,3)])- ...
-               .75)/.15;
-residues(7) = (simData(1201,1)/mean([simData(1201,2),simData(1201,3)])-.75)/.15;
-residues(8) = (simData(1201,1)-simData(601,1) + 6)/1;
-residues(9) = (max_val(3) -25)/2; 
+               .83)/.18;
+residues(7) = (simData(1201,1)/mean([simData(1201,2),simData(1201,3)])-.78)/.29;
+%residues(8) = (simData(1201,1)-simData(601,1) + 6)/1;
+%residues(9) = (max_val(3) -25)/2; 

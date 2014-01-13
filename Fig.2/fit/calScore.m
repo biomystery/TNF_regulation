@@ -1,4 +1,4 @@
-function nrmsd_residues = calScore(input_pars)
+function rmsd_residues = calScore(input_pars)
 
 % expdata
 nfkb_exp = csvread('../../expdata/nfkb.csv',1,0);
@@ -11,10 +11,12 @@ pars = getParams(); % wt parameters
 input_pars = 10.^input_pars;
 
 pars('V_tr') = 1;%input_pars(1);
+
 pars('Km_tr') = input_pars(1);
 pars('k_pr') = input_pars(2);
 pr_fold_mko = input_pars(3);
 pr_fold_tko = input_pars(4);
+pars('n') = input_pars(5); 
 %scale = input_pars(6)
 
 k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold_mko pars('k_pr')/pr_fold_tko]; 
