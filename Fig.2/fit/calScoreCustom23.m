@@ -60,7 +60,7 @@ end
 
 %% calculate score 
 % residue1, peak time 
-residues = zeros(1,14); % 8 features. 
+residues = zeros(1,15); % 8 features. 
 
 % features of nascent profile
 [max_val, max_ind] = max(simData_nascent);
@@ -72,8 +72,10 @@ residues(3) = (max_time(3) - 30)/5 ; % tko peak time
 
 residues(4) = (max_val(3) / max_val(1) - 1.45)/0.42; % peak_tko / peak_wt 
 residues(5) = (max_val(2) / max_val(3) - 1.08)/0.15; % peak_mko /peak_tko 
-residues(6) = (simData_nascent(601,1)/mean([simData_nascent(601,2),simData_nascent(601,3)])- ...
-               .83)/.18;
+
+%residues(6) = (simData_nascent(601,1)/mean([simData_nascent(601,2),simData_nascent(601,3)])- ...
+%               .83)/.18;
+residues(6) = (simData_nascent(601,1)/simData_nascent(601,3)-1.55)/.67;
 residues(7) = (simData_nascent(1201,1)/mean([simData_nascent(1201,2),simData_nascent(1201,3)])-.78)/.29;
 residues(8) = (simData_nascent(601,1) / simData_nascent(1201,1) -2.22)/0.94;
 
@@ -87,6 +89,5 @@ residues(11) = (max_time(3) - 60)/10 ; % tko peak time
 
 residues(12) = (max_val(3) / max_val(1) - 0.73)/0.05; % peak_tko / peak_wt 
 residues(13) = (max_val(2) / max_val(3) - 0.5)/0.06; % peak_mko /peak_tko 
-residues(14) = (simData_mRNA(1201,1)/mean([simData_mRNA(1201,2),simData_mRNA(1201,3)])- ...
-               1.47)/.18;
-residues(15) = (simData_mRNA(1201,2)/simData_mRNA(1201,3) - .59)/.05;
+residues(14) = (simData_mRNA(1201,1)/simData_mRNA(1201,2) - 1.98)/.23;
+residues(15) = (simData_mRNA(1201,1)/simData_mRNA(1201,3) - 1.17)/.14;

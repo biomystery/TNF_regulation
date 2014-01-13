@@ -18,3 +18,4 @@ for i = 1:10
     save fitCust23.mat
 
 end 
+
