@@ -1,11 +1,11 @@
 % read data from R 
 addpath('../../src/')
 
-p = log10([0.5 0.6 1.5 1.5 3]);
+%p = log10([0.5 0.6 1.5 1.5 3]);
 
 for i = 1:10
-    p = parsFinal; 
-    ub = log10([ 1 1 100 100 6]); % V_tr, Km_tr, k_pr, pr_fold
+    p = parsFinal;
+    ub = log10([ 1 1 100 100 6 ]); % V_tr, Km_tr, k_pr, pr_fold
     lb = log10([ 0.05 0.01 0.01 0.01 0.5]);
     ub = p + log10(5) ; lb =p - log10(5); 
     options =optimset('PlotFcns',{@optimplotx,@optimplotfunccount,@optimplotresnorm,@optimplotfirstorderopt},...
