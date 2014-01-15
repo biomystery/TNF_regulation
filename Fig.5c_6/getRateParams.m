@@ -182,21 +182,21 @@ i(90)   = i(20);  %    /((TLR4LPS)^3 + (v.IP(37))^3)  * MyD88;
 % TLR3 metabolism (synthesis and degradation)
 i(91)   = 2e-7*500;   % TLR3 synthesis (txn, tsl, localization)
 i(92)   = 0.0058; % TLR3 --> deg  -- 120' halflife
-i(93)   = .6/1000000;     % PIC +  TLR3 -> CpGTLR3, affinity : 186 nM ± 35 nM
-i(94)   = 0.1116*10; % CpGTLR3 -> CpG +  TLR3 1 × 104 M-1 s-1, 6 mins half-life
-i(95)   = 0;%i(22)/100000;  % TRIF activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
+i(93)   = .6;     % PIC +  TLR3 -> CpGTLR3, affinity : 186 nM ± 35 nM
+i(94)   = 0.1116; % CpGTLR3 -> CpG +  TLR3 1 × 104 M-1 s-1, 6 mins half-life
+i(95)   = i(22);%/100000;  % TRIF activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TNF part
 %  tnf part (NEW)
 t(1) = 1e-5;%tnf constitutive txn 
-t(2) = 10/10;%tnf induced txn 
+t(2) = 1;%tnf induced txn 
 t(3) = 1;%tnf transcription,Hill coefficient
-t(4) = .01*1.2;%tnf transcription induction EC50
+t(4) = .01;%tnf transcription induction EC50
 t(5) = .02;%tnf transcript deg. max rate ~~~ Could be determined by measurement. 
 t(6) = .6;%tnf nascent process rate 
 t(7) = .06;%tnf protein syns rate 
-t(8) = 5.8e-2;%tnf deg rate 
-t(9) = 5.8e-2;%tnf secretion rate 
+t(8) = 0.0154;%5.8e-2;%tnf deg rate 
+t(9) = 0.0154;%5.8e-2;%tnf secretion rate 
 
 end
