@@ -8,12 +8,14 @@ close all
 id.genotype = 'wt';
 feedback_flags = [1, 0]; % no feedback and feedback
 id.output ={'TNFmRNA','TNFpro','NFkBn','IKK','MyD88s','TRIFs','CpG', ...
-            'CpGTLR9','PIC','PICTLR3'};
+            'CpGTLR9','PIC','PICTLR3','TLR4LPS'};
 mRNA_filenames = {'./simData/mRNA_sim.csv','./simData/mRNA_sim_feedback.csv'};
-sec_filenames = {'./simData/sec_sim.csv','./simData/sec_sim_feedback.csv'};
+sec_filenames = {'./simData/sec_sim.csv',['./simData/' ...
+                    'sec_sim_feedback.csv']};
+nfkbn_filenames = {'./simData/nfkb_sim_nofeedback.csv','./simData/nfkb_sim_feedback.csv'};
 
 id.DT = 1;
-id.sim_time = 240;
+id.sim_time = 480;
 t = 0:id.sim_time;
 plot_flag = 1 ;
 stimuli.name= {'LPS','CpG','PIC','TNF'};
@@ -56,11 +58,11 @@ for k = 1:2
     tnfmRNA   = [sim{1}(1,:);sim{2}(1,:);sim{3}(1,:)];
     tnfPro    = [sim{1}(2,:);sim{2}(2,:);sim{3}(2,:)];
     tnfSec    = cumsum([sim{1}(2,:)*tp(9);sim{2}(2,:)*tp(9);sim{3}(2,:)*tp(9)/1.5]');
-
+    nfkbn     = [sim{1}(3,:)/sim{1}(3,1);sim{2}(3,:)/sim{2}(3,1);sim{3}(3,:)/sim{3}(3,1)];
 
     csvwrite(mRNA_filenames{k},[t;tnfmRNA]')
     csvwrite(sec_filenames{k},[t;tnfSec']')
-
+    csvwrite(nfkbn_filenames{k},[t;nfkbn]')
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -68,7 +70,8 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-!R CMD BATCH Fig5c_LPS_CpG_pIC.R
+!R CMD BATCH Fig5c.R
+!R CMD BATCH Fig6.R
 !rm *.Rout
 !rm *.RD* 
 !rm *.Rhi*
