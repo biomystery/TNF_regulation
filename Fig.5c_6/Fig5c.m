@@ -20,7 +20,7 @@ stimuli.name= {'LPS','CpG','PIC','TNF'};
 
 stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml 
 
-styles = {'k-','k--'}
+styles = {'k--','k-'};
 
 for k = 1:2
     id.flag_noTnfFeedback = feedback_flags(k);%true or false
@@ -55,7 +55,7 @@ for k = 1:2
     k_sec = tp(9); %pic condtion, sec rate 
     tnfmRNA   = [sim{1}(1,:);sim{2}(1,:);sim{3}(1,:)];
     tnfPro    = [sim{1}(2,:);sim{2}(2,:);sim{3}(2,:)];
-    tnfSec    = cumsum([sim{1}(2,:)*tp(9);sim{2}(2,:)*tp(9);sim{3}(2,:)*tp(9)/2.5]');
+    tnfSec    = cumsum([sim{1}(2,:)*tp(9);sim{2}(2,:)*tp(9);sim{3}(2,:)*tp(9)/1.5]');
 
 
     csvwrite(mRNA_filenames{k},[t;tnfmRNA]')
