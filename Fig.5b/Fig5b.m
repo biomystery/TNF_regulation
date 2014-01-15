@@ -43,4 +43,5 @@ csvwrite('./simData/prot_sim.csv',[t;tnfPro]')
 csvwrite('./simData/sec_sim.csv',[t;tnfSec']')
 
 % end
-!R CMD BATCH Fig5b_TLR4_LPS.R
+!R CMD BATCH Fig5b.R
+!rm *.Rout
