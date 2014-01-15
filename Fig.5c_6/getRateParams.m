@@ -191,12 +191,12 @@ i(95)   = i(22);%/100000;  % TRIF activation. flux_a_MyD88       = v.IP(20)   * 
 %  tnf part (NEW)
 t(1) = 1e-5;%tnf constitutive txn 
 t(2) = 1;%tnf induced txn 
-t(3) = 1;%tnf transcription,Hill coefficient
-t(4) = 0.01;%tnf transcription induction EC50
-t(5) = .02;%tnf transcript deg. max rate ~~~ Could be determined by measurement. 
-t(6) = .6;%tnf nascent process rate 
-t(7) = .06;%tnf protein syns rate 
-t(8) = 0.0154;%5.8e-2;%tnf deg rate 
-t(9) = 0.0154;%5.8e-2;%tnf secretion rate 
+t(3) = 1;%1tnf transcription,Hill coefficient
+t(4) = 0.01;% .01tnf transcription induction EC50
+t(5) = .02;%.tnf transcript deg. max rate ~~~ Could be determined by measurement. 
+t(6) = 0.6;%.6,tnf nascent process rate 
+t(7) = .06;%.06tnf protein syns rate 
+t(8) = 0.0154;%.0154 5.8e-2;%tnf deg rate 
+t(9) = 0.0154;%.0154 5.8e-2;%tnf secretion rate 
 
 end

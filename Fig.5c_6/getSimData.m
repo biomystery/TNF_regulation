@@ -25,7 +25,7 @@ elseif strcmp(id.stimuli,'PIC')
     v.DOSE = id.dose*(1.96e-4); % no transmistion yet
     v.TP(5) = .07;         % No stabilization for PIC 
     v.TP(6) = v.TP(6)/3; % NEW process rate    
-    v.TP(4) = v.TP(4) *10;
+    v.TP(4) = v.TP(4) *10;% 10 fold higher threshold. 
 end
 
 % TNF feedback: controlled by TNF receptor  
