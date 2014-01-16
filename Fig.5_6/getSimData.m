@@ -11,6 +11,7 @@ v.DT = id.DT;
 v.SIM_TIME     = id.sim_time; % min of stimulation phase (phase
                               % 2)v.GENOTYPE = id.genotype;
 v.STIMULI  = id.stimuli; 
+
 % Stimuli
 if strcmp(id.stimuli,'LPS')
     v.DOSE = id.dose*v.IP(52);
@@ -37,7 +38,7 @@ end
 
 v.INITVALUES = getInit();
 
-% mutant 
+% mutant , mko and tko and wt
 switch id.genotype
   case 'mko' %PIC
     v.INITVALUES{1}(25)=0; %myd88

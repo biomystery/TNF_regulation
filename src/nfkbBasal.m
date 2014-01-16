@@ -1,4 +1,4 @@
-function v=nfkbBasal(v,flag)
+function v=nfkbBasal(v)
   
 %% Call the ODE function to reset the persistent variables
 nfkbOde([],[],[],v);
@@ -12,10 +12,15 @@ threshold   = 1;        % Max % difference used by evaluate_phase1()
 initial_values = v.INITVALUES{1};
 v.BASAL_VALUES = [];
 
+if  ~v.flag_noTnfFeedback
+    tmp = v.IP(54);
+    v.IP(54) = 0; 
+end
+
 while ~static % Iterate through Phase 1 until equilibrium is reached
     options = odeset('RelTol', 1e-4);
     [t1, r1] = ode15s('nfkbOde', [v.START_TIME 0], initial_values,options,v);
-%     plot(t1,r1(:,44));hold on ; 
+    %plot(t1,r1(:,44));hold on ; 
     % Evaluate results and return true if at equilibrium
     
     if (evaluatePhase1(r1, threshold)) % values have converged
@@ -33,7 +38,11 @@ while ~static % Iterate through Phase 1 until equilibrium is reached
         initial_values  = r1(end,:);
     end
 end
+disp(count)
 
+if  ~v.flag_noTnfFeedback
+    v.IP(54) = tmp; 
+end
 %% subsubroutine static
     function static = evaluatePhase1(results,threshold)
         % threshold= percentage

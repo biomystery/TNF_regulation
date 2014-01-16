@@ -38,6 +38,16 @@ n(54:56)= [6e-5;      6e-5;       6e-5 ]; % IkB:NFkB Dsn nuc
 n(57:59)= [0.36;      0.12;       0.18 ]; % Free IkB + IKK deg
 n(60:62)= [0.36;      0.12;       0.18 ]; % IkB:NFkB + IKK deg
 
+% A20 (NEW)
+n(63)  = 2e-6;    % basal txn rate 2e-6
+n(64)  = 0.4;     % inducible txn for A(20),0.4
+n(65)  = 3;       % Hill Coefficient
+n(66)  = 0;       % inducible txn delay
+n(67)  = 0.035;   % mRNA Degradation
+n(68)  = 0.25;    % translation rate
+n(69)  = 30;      % tsl delay
+n(70)  = 0.0029;  % protein degradation
+n(71)  = 120;     % promoter shutdown (experiments show ~120min)
 
 %% ----- IKK Activation Module -----
 i(1) =     0.1698;  % k_b_lps 1
@@ -84,7 +94,7 @@ i(29)  = 0.25;    % IKKK     --> IKKK_off (constitutive), 31
 
 % IKK
 i(30)  = 520;    % IKK_off  --> IKK (IKKK mediated),32
-i(31)  = 5e-5*15 ;    % IKK_off  --> IKK (constitutive),33
+i(31)  = 5e-5 ;    % IKK_off  --> IKK (constitutive),33
 i(32)  = 0.02  ;    % IKK      --> IKK_off (constitutive), 34
 i(33)  = 0.15 ;    % IKK      --> IKK_i (constitutive)  , 35
 i(34)  = 0.02  ;    % IKKi     --> IKK_off (constitutive) , 36
@@ -111,20 +121,93 @@ i(49) =         7.477;      %k_a_TRAF6_MyS88s, 52
 i(50) =     3.4132;      %k_a_TRAF6_TRIFs, 53
 i(51) =    0.06791; % ikk devider, 38 
 i(52) =     633.55; % LPS multiplier
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% the TNFR parameters
+%----- IKK Activation Module ----- NEW f
+i(53)   = 0.0154; % pd_m_tnf 45' half life of exogenous TNF
+
+% tnfrm metabolism (synthesis and degradation)
+i(54)   = 2e-7;   % tnfrm synthesis (txn, tsl, localization)
+i(55)   = 0.0058; % tnfrm --> deg  -- 120' halflife
+
+% TNF-Independent C1 Activation
+i(56)   = 1e-5;   % 3tnfrm --> TNFR
+i(57)   = 0.1;    % TNFR   --> 3tnfrm
+i(58)   = 0.023;  % TNFR internalization -- 30' halflife
+
+i(59)   = 100;    % TNFR + TTR --> C1_off
+i(60)   = 0.1;    % C1_off --> TNFR + TTR
+i(61)   = 30;     % C1_off --> C1
+i(62)  = 2;      % C1     --> C1_off
+i(63)  = 1000;   % C1     --> C1_off (A20 Mediated)
+i(64)  = i(60);   % C1     --> TNFR + TTR
+i(65)  = i(58);   % C1_off internalization
+i(66)  = i(58);   % C1 internalization
+
+% TNF-dependent C1 Activation
+i(67)  = 1100;   % 3tnfrm + tnf --> TNFRtnf
+i(68)  = i(67);  % TNFR + tnf --> TNFRtnf
+i(69)  = 0.021;  % TNFRtnf   --> TNFR + tnf
+i(70)  = i(58);   % TNFRtnf internalization -- 30' halflife
+
+i(71)  = i(59);   % TNFRtnf + TTR --> C1tnf_off
+i(72)  = i(60);   % C1tnf_off --> TNFRtnf + TTR
+i(73)  = i(61);   % C1tnf_off --> C1tnf
+i(74)  = i(62);  % C1tnf     --> C1tnf_off
+i(75)  = i(63);  % C1tnf     --> C1tnf_off (A20 Mediated)
+i(76)  = i(60);   % C1tnf     --> TNFRtnf + TTR
+i(77)  = i(58);   % C1tnf_off internalization
+i(78)  = i(58);   % C1tnf internalization
+
+i(79)  = i(69);  % C1tnf_off --> C1_off + tnf
+i(80)  = i(67);  % C1_off + tnf --> C1tnf_off
+i(81)  = i(69);  % C1tnf    --> C1 + tnf
+i(82)  = i(67);  % C1 + tnf --> C1tnf
+
+% IKKK
+
+i(83)  = 500*0.02;    % IKKK_off --> IKKK (C1 mediated)?500
+i(84)  = i(83);  % IKKK_off --> IKKK (C1tnf mediated)
+
+%% the CPG-TLR9 parameters
+% TLR9rm metabolism (synthesis and degradation)
+i(85)   = 2e-7*500;   % TLR9 synthesis (txn, tsl, localization)
+i(86)   = 0.0058; % TLR9 --> deg  -- 120' halflife
+i(87)   = .6;     % CpG +  TLR9 -> CpGTLR9, affinity : 186 nM ± 35 nM
+i(88)   = 0.1116; % CpGTLR9 -> CpG +  TLR9 1 × 104 M-1 s-1, 6 mins half-life
+i(89)   = i(18)*10;  %MyD88 activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
+i(90)   = i(20)/1;  %    /((TLR4LPS)^3 + (v.IP(20))^3)  * MyD88;
+
+%% the PIC-TLR3 parameters
+% TLR3 metabolism (synthesis and degradation)
+i(91)   = 2e-7*500;   % TLR3 synthesis (txn, tsl, localization)
+i(92)   = 0.0058; % TLR3 --> deg  -- 120' halflife
+i(93)   = .6;     % PIC +  TLR3 -> CpGTLR3, affinity : 186 nM ± 35 nM
+i(94)   = 0.1116; % CpGTLR3 -> CpG +  TLR3 1 × 104 M-1 s-1, 6 mins half-life
+i(95)   = i(22);%/100000;  % TRIF activation. flux_a_MyD88       = v.IP(20)   * (TLR4LPS)^3 ...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TNF part
-
 %  tnf part (NEW)
 t(1) = 1e-5;%tnf constitutive txn 
-t(2) = 10;%tnf induced txn 
-t(3) = 3;%tnf transcription,Hill coefficient
-t(4) = .5;%tnf transcription induction EC50
-t(5) = .02;%tnf transcript deg. max rate ~~~ Could be determined by measurement. 
-t(6) = .02*5;%tnf nascent process rate 
-t(7) = 1;%tnf protein syns rate 
-t(8) = .18;%tnf deg rate 
-t(9) = .18;%tnf secretion rate 
+t(2) = 1;%tnf induced txn 
+t(3) = 3;%1tnf transcription,Hill coefficient
+t(4) = 0.01;% .01tnf transcription induction EC50
+t(5) = .02;%.tnf transcript deg. max rate ~~~ Could be determined by measurement. 
+t(6) = 0.6;%.6,tnf nascent process rate 
+t(7) = .06;%.06tnf protein syns rate 
+t(8) = 0.0154;%.0154 5.8e-2;%tnf deg rate 
+t(9) = 0.0154;%.0154 5.8e-2;%tnf secretion rate 
 
+ %  tnf part (NEW) for figg5b
+ t(1) = 1e-5;%tnf constitutive txn 
+ t(2) = 10;%tnf induced txn 
+ t(3) = 3;%tnf transcription,Hill coefficient
+ t(4) = .5;%tnf transcription induction EC50
+ t(5) = .02;%tnf transcript deg. max rate ~~~ Could be determined by measurement. 
+ t(6) = .02*5;%tnf nascent process rate 
+ t(7) = 1;%tnf protein syns rate 
+ t(8) = .18;%tnf deg rate 
+ t(9) = .18;%tnf secretion rate 
 
 end

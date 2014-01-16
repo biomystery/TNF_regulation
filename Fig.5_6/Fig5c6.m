@@ -1,10 +1,9 @@
-close all
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 1. simulation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% basic setting for fig5c
+% setting up the parameters 
 id.genotype = 'wt';
 feedback_flags = [1, 0]; % no feedback and feedback
 id.output ={'TNFmRNA','TNFpro','NFkBn','IKK','MyD88s','TRIFs','CpG', ...
@@ -17,13 +16,14 @@ nfkbn_filenames = {'./simData/nfkb_sim_nofeedback.csv','./simData/nfkb_sim_feedb
 id.DT = 1;
 id.sim_time = 480;
 t = 0:id.sim_time;
-plot_flag = 1 ;
+plot_flag = 0;
 stimuli.name= {'LPS','CpG','PIC','TNF'};
 
 stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml 
 
 styles = {'k--','k-'};
 
+% run the model with and without feedback 
 for k = 1:2
     id.flag_noTnfFeedback = feedback_flags(k);%true or false
     
@@ -52,7 +52,7 @@ for k = 1:2
         end
     end
 
-    %%
+    % write the data files. 
     [~,~,tp] = getRateParams(); % LPS , wt 
     k_sec = tp(9); %pic condtion, sec rate 
     tnfmRNA   = [sim{1}(1,:);sim{2}(1,:);sim{3}(1,:)];
@@ -69,10 +69,8 @@ end
 % 2. plot in R
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 !R CMD BATCH Fig5c.R
 !R CMD BATCH Fig6.R
 !rm *.Rout
-!rm *.RD* 
-!rm *.Rhi*
+
 
