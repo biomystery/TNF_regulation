@@ -1,5 +1,5 @@
 function residues = calScoreCustom23(input_pars)
-
+addpath('../../src/')
 % expdata
 nfkb_exp = csvread('../../expdata/nfkb.csv',1,0);
 
@@ -9,7 +9,7 @@ plot_flag = 1;
 
 pars = getParams(); % wt parameters
 input_pars = 10.^input_pars;
-pars('V_tr') = input_pars(6); 
+pars('V_tr') = 1;%input_pars(6); 
 pars('Km_tr') = input_pars(1);
 pars('k_pr') = input_pars(2);
 pr_fold_mko = input_pars(3);
@@ -17,7 +17,7 @@ pr_fold_tko = input_pars(4);
 pars('n') = input_pars(5); 
 
 kdeg = [.02 .02 .07]; % wt, mko, tko 
-k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold_mko pars('k_pr')/pr_fold_tko]; ...
+k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold_mko pars('k_pr')/pr_fold_tko]; 
 
 % init     
 yinit_all = zeros(2,3);
@@ -34,12 +34,14 @@ times = 0:.1:120;%nascent_all(:,1);
 
 % mko 
 pars('k_pr') = k_pr_all(2);
+pars('Km_tr') = pars('Km_tr') *2; 
 pars('kdeg_m') = kdeg(2);
 [~,mko]= ode15s(@ode23,times,yinit_all(:,2),[],[],nfkb_exp(:,[1 ...
                     3]),pars);
 
 % tko 
 pars('k_pr') = k_pr_all(3);
+pars('Km_tr') = input_pars(1); 
 pars('kdeg_m') = kdeg(3);
 [~,tko]= ode15s(@ode23,times,yinit_all(:,3),[],[],nfkb_exp(:,[1 ...
                     4]),pars);
