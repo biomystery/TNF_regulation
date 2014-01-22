@@ -3,19 +3,15 @@ addpath('../src/')
 nfkb_exp = csvread('../expdata/nfkb.csv',1,0);
 plot_flag = 0; 
 pars = getParams(); % wt parameters
-pr_fold = [pars('pr_fold') 1];
+pr_fold = [pars('pr_fold')*3 pars('pr_fold')];
 k_pr = pars('k_pr');
-pars('V_tr') = 1;
+
 filenames = {'./simData/different_pr.csv','./simData/same_pr.csv'};
 
 for i =1:2
     pars('pr_fold') = pr_fold(i);
-    k_pr_all = [pars('k_pr') pars('k_pr')/pars('pr_fold') ...
-                pars('k_pr')/pars('pr_fold')]; 
-    %    if i ==1
-    %    k_pr_all = [pars('k_pr') pars('k_pr')/0.8 ...
-    %            pars('k_pr')/1.4]; 
-    %end
+    k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold(1) ...
+                pars('k_pr')/pr_fold(2)];
     
     yinit_all = pars('V_tr')* nfkb_exp(1,2:end).^pars('n')./(nfkb_exp(1, ...
                                                       2:end).^pars('n')+pars('Km_tr')^pars('n'))./k_pr_all;
@@ -28,11 +24,15 @@ for i =1:2
 
     % mko 
     pars('k_pr') = k_pr_all(2);
+    back_km = pars('Km_tr');
+    pars('Km_tr') = pars('Km_tr')*2; 
+    
     [~,nascent_mko]= ode15s(@ode2,times,yinit_all(2),[],[],nfkb_exp(:,[1 ...
                         3]),pars);
 
     % tko 
     pars('k_pr') = k_pr_all(3);
+    pars('Km_tr') = back_km; 
     [~,nascent_tko]= ode15s(@ode2,times,yinit_all(3),[],[],nfkb_exp(:,[1 ...
                         4]),pars);
 
@@ -54,5 +54,3 @@ end
 % run R
 !R CMD BATCH fig2.R
 !rm *.Ro* 
-%!rm *.Rh*
-%!rm *.RD*

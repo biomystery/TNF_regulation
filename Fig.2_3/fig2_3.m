@@ -6,7 +6,7 @@ plot_flag = 0;
 
 pars = getParams(); % wt parameters
 
-k_pr_all = [pars('k_pr') pars('k_pr')/1.5 pars('k_pr')/1.5]; 
+k_pr_all = [pars('k_pr') pars('k_pr')/(pars('pr_fold')*3) pars('k_pr')/pars('pr_fold')]; 
 kdeg = [.02 .02 .07]; % wt, mko, tko 
 
 yinit_all = zeros(2,3);
@@ -21,6 +21,8 @@ times = 0:.1:120;%nascent_all(:,1);
                pars);
 % mko 
 pars('k_pr') = k_pr_all(2);
+back_km = pars('Km_tr');
+pars('Km_tr') = pars('Km_tr') *2; 
 pars('kdeg_m') = kdeg(2);
 [~,mko]= ode15s(@ode23,times,yinit_all(:,2),[],[],nfkb_exp(:,[1 ...
                     3]),pars);
@@ -28,7 +30,7 @@ pars('kdeg_m') = kdeg(2);
 % tko 
 pars('k_pr') = k_pr_all(3);
 pars('kdeg_m') = kdeg(3);
-
+pars('Km_tr') = back_km; 
 [~,tko]= ode15s(@ode23,times,yinit_all(:,3),[],[],nfkb_exp(:,[1 ...
                     4]),pars);
 
