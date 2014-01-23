@@ -7,16 +7,17 @@ plot_flag = 1;
 pars = getParams(); % wt parameters
 
 
-N = 30;
-pr_fold_mko = linspace(3,6,N);
-pr_fold_tko = linspace(1,4,N);
+N = 31;
+kms = linspace(0.3,0.6,N);
+kps = linspace(0.04,1.24,N)
+
 score = zeros(N,N);
 
 
 for i =1:N
     for j = 1:N
-        input_pars(1) = pr_fold_mko(i);
-        input_pars(2) = pr_fold_tko(j);
+        input_pars(1) = kms(i);
+        input_pars(2) = kps(j);
 
         % cal score
         residues = calScoreCustom(input_pars,nfkb_exp,expData);
@@ -27,18 +28,15 @@ for i =1:N
     end
 end
 
-save ./simData/fig2s.mat 
+save ./simData/fig2s2.mat 
 
 % plot 
 if plot_flag
-    imagesc(pr_fold_tko,pr_fold_mko,log10(score))
+    imagesc(kms,kps,score,[0.6 3])
     colorbar
-    xlabel('k_{Pr}^{tko}');ylabel('k_{Pr}^{mko}');
+    xlabel('k_{Pr}^{wt}');ylabel('k_{dTr}');
 end 
 
 % save data 
-csvwrite('./simData/nrmsd.csv',score)
+csvwrite('./simData/nrmsd2.csv',score)
 
-% run R
-!R CMD BATCH fig2s.R
-!rm *.Ro* 

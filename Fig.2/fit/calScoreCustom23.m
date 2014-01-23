@@ -74,9 +74,6 @@ residues(3) = (max_time(3) - 30)/5 ; % tko peak time
 
 residues(4) = (max_val(1) / max_val(2) - 0.68)/0.11; % peak_tko / peak_wt 
 residues(5) = (max_val(1) / max_val(3) - 0.75)/0.22; % peak_mko /peak_tko 
-
-%residues(6) = (simData_nascent(601,1)/mean([simData_nascent(601,2),simData_nascent(601,3)])- ...
-%               .83)/.18;
 residues(6) = (simData_nascent(601,1)/simData_nascent(601,3)-1.55)/ ...
     .67;
 residues(7) = (simData_nascent(601,1)/simData_nascent(601,2)-0.59)/.07;
