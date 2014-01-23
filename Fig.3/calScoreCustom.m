@@ -1,7 +1,7 @@
 function residues = calScoreCustom(input_pars,nascent_exp,expData)
 
 % params
-plot_flag = 1;
+plot_flag = 0;
 pars = getParams(); % wt parameters
 
 pr_fold_mko = input_pars(1);
@@ -10,7 +10,7 @@ kdeg_m = [.02 .02 .07]; % wt, mko, tko
 
 
 k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold_mko pars('k_pr')/pr_fold_tko]; 
-yinit = nascent_exp(1,2:end) .* k_pr_all./kdeg_m;
+yinit = nascent_exp(1,2:end) .* k_pr_all/kdeg_m(3);
 
 times = 0:.1:120;%nascent_all(:,1);
 
