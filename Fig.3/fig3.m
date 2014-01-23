@@ -3,7 +3,7 @@ addpath('../src/')
 nascent_exp = csvread('../expdata/nascent.csv',1,0);
 expData = csvread('../expdata/mRNA.csv',1,0);
 nascent_exp(:,[3,5,7])=[]; % delete the std cols 
-
+nascent_exp(:,2:end)= nascent_exp(:,2:end)/100;
 % plot options 
 plot_flag = 1; 
 
