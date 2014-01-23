@@ -32,7 +32,7 @@ save ./simData/fig2s2.mat
 
 % plot 
 if plot_flag
-    imagesc(kms,kps,score,[0.6 3])
+    imagesc(kms,kps,log10(score));%,[0.6 3])
     colorbar
     xlabel('k_{Pr}^{wt}');ylabel('k_{dTr}');
 end 
