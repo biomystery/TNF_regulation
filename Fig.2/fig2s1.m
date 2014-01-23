@@ -20,9 +20,7 @@ for i =1:N
 
         % cal score
         residues = calScoreCustom(input_pars,nfkb_exp,expData);
-        
         score(i,j) = sum(residues.^2)/(numel(residues)-2-1);
-        
         disp(((i-1)*N+j)/(N*N))
     end
 end
@@ -31,7 +29,7 @@ save ./simData/fig2s.mat
 
 % plot 
 if plot_flag
-    imagesc(pr_fold_tko,pr_fold_mko,score,[0.6 3])
+    imagesc(pr_fold_tko,pr_fold_mko,score,[0.6 3]) % col,row
     colorbar
     xlabel('k_{Pr}^{tko}');ylabel('k_{Pr}^{mko}');
 end 

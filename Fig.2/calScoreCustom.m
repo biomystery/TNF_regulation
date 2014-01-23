@@ -5,7 +5,7 @@ function residues = calScoreCustom(input_pars,nfkb_exp,expData)
 %expData =  csvread('../../expdata/nascent2.csv',1,0);
 
 % params
-plot_flag = 0;
+plot_flag = 1;
 pars = getParams(); % wt parameters
 
 pr_fold_mko = 4.5;%input_pars(1);
