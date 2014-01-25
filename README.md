@@ -4,5 +4,5 @@ Corpration with Andrew. Model's coding for TNF regulation in LPS, CpG and PIC
 
 ## Results ##
 
-### 1. ###
+### 1. MyD88 stabilize TNF$$\alpha$$ ###
 
