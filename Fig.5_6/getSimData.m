@@ -42,11 +42,12 @@ v.INITVALUES = getInit();
 switch id.genotype
   case 'mko' %PIC
     v.INITVALUES{1}(25)=0; %myd88
-    v.TP(6) = v.TP(6)/3; % NEW process rate
+    v.TP(6) = v.TP(6)/4.5; % NEW process rate
+    v.TP(4) = v.TP(4) * 2;% 10 fold higher threshold.     
   case 'tko' % CpG
     v.INITVALUES{1}(27)=0;
     v.TP(5) = .07;         % NEW mRNA stability
-    v.TP(6) = v.TP(6)/3; % NEW process rate 
+    v.TP(6) = v.TP(6)/1.5; % NEW process rate 
     v.TP(9) = v.TP(9)/2.5; % NEW sec rate 
   case 'wt'
     v.IP(24:25) = v.IP(49:50);

@@ -1,3 +1,4 @@
+close all; clear; 
 addpath('../src')
 %% wt simulation
 % 1. low dose, wt

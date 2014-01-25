@@ -1,4 +1,4 @@
-
+close all; clear;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 1. simulation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -16,7 +16,7 @@ nfkbn_filenames = {'./simData/nfkb_sim_nofeedback.csv','./simData/nfkb_sim_feedb
 id.DT = 1;
 id.sim_time = 480;
 t = 0:id.sim_time;
-plot_flag = 0;
+plot_flag = 1;
 stimuli.name= {'LPS','CpG','PIC','TNF'};
 
 stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml 
