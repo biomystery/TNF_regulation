@@ -26,9 +26,4 @@ Corpration with Andrew. Model's coding for TNF regulation in LPS, CpG and PIC
 - [x] Solve the delay in CpG induced mRNA profile (fig5d) 
 
 
-- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
-- [x] list syntax required (any unordered or ordered list supported)
-- [x] this is a complete item
-- [ ] this is an incomplete item
-
 
