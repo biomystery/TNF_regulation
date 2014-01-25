@@ -1,6 +1,8 @@
 % read data from R 
 addpath('../src/')
 nfkb_exp = csvread('../expdata/nfkb.csv',1,0);
+nascent_exp = csvread('../expdata/nascent.csv',1,0);
+mRNA_exp = csvread('../expdata/mRNA.csv',1,0);
 
 plot_flag = 0; 
 
@@ -35,21 +37,47 @@ pars('Km_tr') = back_km;
                     4]),pars);
 
 figure
-subplot 211
+subplot 221
 plot(t,wt(:,1),'k')
 hold on 
 plot(t,tko(:,1),'c')
 plot(t,mko(:,1),'Color', [0.5 0 0.5])
+legend('wt','tko','mko')
 hold off
-subplot 212
+xlim([0 150])
+title('nascent sim')
+
+subplot 222
+errorbar(nascent_exp(:,1),nascent_exp(:,2),nascent_exp(:,3),'k')
+hold on 
+errorbar(nascent_exp(:,1),nascent_exp(:,4),nascent_exp(:,5),'Color',[0.5 ...
+                    0 0.5])
+errorbar(nascent_exp(:,1),nascent_exp(:,6),nascent_exp(:,3),'c')
+hold off
+xlim([0 150])
+title('nascent exp')
+
+subplot 223 
 plot(t,wt(:,2),'k')
 hold on 
 plot(t,tko(:,2),'c')
 plot(t,mko(:,2),'Color', [0.5 0 0.5])
 hold off
+xlim([0 150])
+title('mRNA sim')
 
+subplot 224
+errorbar(mRNA_exp(:,1),mRNA_exp(:,2),mRNA_exp(:,3),'k')
+hold on 
+errorbar(mRNA_exp(:,1),mRNA_exp(:,4),mRNA_exp(:,5),'Color',[0.5 ...
+                    0 0.5])
+errorbar(mRNA_exp(:,1),mRNA_exp(:,6),mRNA_exp(:,3),'c')
+hold off
+xlim([0 150])
+title('mRNA exp')
+
+
+%% save 
 saveas(gca,'fig2_3.pdf')
-
-%function dydt = ode(t,x,options,nascent,kdeg)
-%dydt= interp1(nascent(:,1),nascent(:,2),t) -kdeg*x ;
-%end
+close; 
+!open fig2_3.pdf
