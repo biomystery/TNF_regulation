@@ -1,3 +1,3 @@
-function dydt = ode2(t,x,options,mRNA,kdeg,ksec)
-dydt= interp1(mRNA(:,1),mRNA(:,2),t) -kdeg*x -ksec*x ;
+function dydt = ode4_1(t,x,options,mRNA,pars)
+    dydt= pars('k_tl')*interp1(mRNA(:,1),mRNA(:,2),t) -pars('kdeg_p')*x -pars('k_sec')*x ;
 end

@@ -1,41 +1,39 @@
+
 % read data from R 
 mRNA_all = csvread('../expdata/mRNA.csv',1,0);
-mRNA_all(:,2:end) = mRNA_all(:,2:end)/9/15*8.4; % tl_rate
-kdeg = 5.8e-3*10; % from Werner et al. 2008
-tl_regulator  = 1.5; %  fold less in tko or 1.5
-mRNA_all(:,[2,4,6]) = mRNA_all(:,[2,4,6])/tl_regulator; % only TKO has slower
-                                                % translation rate 
+pars = getParams(); 
 
-yinit_all = mRNA_all(1,[2,4,6])/kdeg;
+
+k_tls = [pars('k_tl'),pars('k_tl'),pars('k_tl')]/pars('tl_fold'); 
+yinit_all = mRNA_all(1,[2,4,6]).*k_tls/pars('kdeg_p'); % init 
 
 times = 0:.1:max(mRNA_all(:,1));%mRNA_all(:,1);
+pars('k_tl') = k_tls(1); % set as tko
 [t,proTNF_wt]= ode15s(@ode4,times,yinit_all(1),[],[],mRNA_all(:,1:2), ...
-                    kdeg);
+                    pars);
 [~,proTNF_mko]= ode15s(@ode4,times,yinit_all(2),[],[],mRNA_all(:,[1 ...
-                    4]),kdeg);
+                    4]),pars);
 [~,proTNF_tko]= ode15s(@ode4,times,yinit_all(3),[],[],mRNA_all(:,[1 ...
-                    6]),kdeg);
+                    6]),pars);
 
 csvwrite('./simData/proTNF_all_sec.csv',[t proTNF_wt proTNF_mko proTNF_tko])
 
 
 % secretion 
 
-ksec = kdeg;
-sec_regulator = 5; % 2.5
-                     %ksec = kdeg/sec_regulator;
-
-yinit_all = mRNA_all(1,[2,4,6])/(kdeg + ksec);
-
+k_secs = [pars('k_sec'),pars('k_sec'),pars('k_sec')/pars('sec_fold')];
+yinit_all = mRNA_all(1,[2,4,6]).*k_tls./(pars('kdeg_p')+k_secs); % init 
 
 [t,TNF_wt]= ode15s(@ode4_1,times,yinit_all(1),[],[],mRNA_all(:,1:2), ...
-                    kdeg,ksec);
+                    pars);
 [~,TNF_mko]= ode15s(@ode4_1,times,yinit_all(2),[],[],mRNA_all(:,[1 ...
-                    4]),kdeg,ksec);
-[~,TNF_tko]= ode15s(@ode4_1,times,yinit_all(3),[],[],mRNA_all(:,[1 ...
-                    6]),kdeg,ksec/sec_regulator);
+                    4]),pars);
 
-csvwrite('./simData/sec_all_sec.csv',[t cumsum([TNF_wt*ksec TNF_mko*ksec TNF_tko*ksec/sec_regulator])]);
+pars('k_sec') = k_secs(3);
+[~,TNF_tko]= ode15s(@ode4_1,times,yinit_all(3),[],[],mRNA_all(:,[1 ...
+                    6]),pars);
+
+csvwrite('./simData/sec_all_sec.csv',[t cumsum([TNF_wt*k_secs(1) TNF_mko*k_secs(2) TNF_tko*k_secs(3)])]);
 
 
 %end

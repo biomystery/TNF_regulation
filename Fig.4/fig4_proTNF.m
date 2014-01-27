@@ -1,40 +1,41 @@
 % read data from R 
 mRNA_all = csvread('../expdata/mRNA.csv',1,0);
-mRNA_all(:,2:end) = mRNA_all(:,2:end)/9/15*8.4; % tl_rate
-kdeg = 5.8e-3*10; % from Werner et al. 2008
-tl_regulator  = 1.5; %  fold less in tko or 1.5
-mRNA_all(:,[2,4,6]) = mRNA_all(:,[2,4,6])/tl_regulator;
+pars = getParams(); 
 
-yinit_all = mRNA_all(1,[2,4,6])/kdeg;
+
+k_tls = [pars('k_tl'),pars('k_tl'),pars('k_tl')]/pars('tl_fold'); 
+yinit_all = mRNA_all(1,[2,4,6]).*k_tls/pars('kdeg_p'); % init 
+
 
 times = 0:.1:max(mRNA_all(:,1));%mRNA_all(:,1);
+back_tl = pars('k_tl');
+pars('k_tl') = k_tls(1);
 [t,proTNF_wt]= ode15s(@ode4,times,yinit_all(1),[],[],mRNA_all(:,1:2), ...
-                    kdeg);
+                    pars);
 [~,proTNF_mko]= ode15s(@ode4,times,yinit_all(2),[],[],mRNA_all(:,[1 ...
-                    4]),kdeg);
+                    4]),pars);
 [~,proTNF_tko]= ode15s(@ode4,times,yinit_all(3),[],[],mRNA_all(:,[1 ...
-                    6]),kdeg);
+                    6]),pars);
+%pars('k_tl') = back_tl;
 
 csvwrite('./simData/proTNF_all.csv',[t proTNF_wt proTNF_mko proTNF_tko])
 
 
 % secretion 
+k_secs = [pars('k_sec'),pars('k_sec'),pars('k_sec')]/pars('sec_fold');
+yinit_all = mRNA_all(1,[2,4,6]).*k_tls./(pars('kdeg_p')+k_secs); % init 
 
-
-sec_regulator = 2.5; % 2.5
-ksec = kdeg/sec_regulator;
-
-yinit_all = mRNA_all(1,[2,4,6])/(kdeg + ksec);
-
+back_sec = pars('k_sec'); 
+pars('k_sec') = k_secs(1);
 
 [t,TNF_wt]= ode15s(@ode4_1,times,yinit_all(1),[],[],mRNA_all(:,1:2), ...
-                    kdeg,ksec);
+                    pars);
 [~,TNF_mko]= ode15s(@ode4_1,times,yinit_all(2),[],[],mRNA_all(:,[1 ...
-                    4]),kdeg,ksec);
+                    4]),pars);
 [~,TNF_tko]= ode15s(@ode4_1,times,yinit_all(3),[],[],mRNA_all(:,[1 ...
-                    6]),kdeg,ksec);
+                    6]),pars);
 
-csvwrite('./simData/sec_all.csv',[t cumsum([TNF_wt*ksec TNF_mko*ksec TNF_tko*ksec])]);
+csvwrite('./simData/sec_all.csv',[t cumsum([TNF_wt*k_secs(1) TNF_mko*k_secs(2) TNF_tko*k_secs(3)])]);
 
 
 %end

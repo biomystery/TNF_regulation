@@ -4,7 +4,7 @@ Corpration with Andrew. Model's coding for TNF regulation in LPS, CpG and PIC
 
 ## Results ##
 
-# 1. TRIF stabilize TNF mRNA #
+### 1. TRIF stabilize TNF mRNA ###
 
 * Increase the stability by 3.5 fold. 
 

@@ -33,11 +33,11 @@ layout(matrix(1:6,2,3,byrow=T))
 
 # no regulation
 matplot(proTNF_sim[,1],proTNF_sim[,2:4],type='l',pch=pchs,col=colors,
-        lty=rep(1,3),xlab='Time (mins)',ylab='proTNF (sim)',xlim=c(0,120),ylim=c(0,100),
+        lty=rep(1,3),xlab='Time (mins)',ylab='proTNF (sim)',xlim=c(0,120),
         main = 'No tl regulation',lwd=2)
 
 matplot(proTNF_sim_tl[,1],proTNF_sim_tl[,2:4],type='l',pch=pchs,col=colors,
-        lty=rep(1,3),xlab='Time (mins)',ylab='proTNF (sim)',xlim=c(0,120),ylim=c(0,100),
+        lty=rep(1,3),xlab='Time (mins)',ylab='proTNF (sim)',xlim=c(0,120),
         main = 'Tl regulation',lwd=2)
 
 

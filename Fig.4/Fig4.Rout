@@ -17,6 +17,8 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+[Previously saved workspace restored]
+
 Error in dyn.load(file, DLLpath = DLLpath, ...) : 
   unable to load shared object '/Library/Frameworks/R.framework/Versions/3.0/Resources/library/stats/libs/stats.so':
   dlopen(/Library/Frameworks/R.framework/Versions/3.0/Resources/library/stats/libs/stats.so, 6): Symbol not found: __gfortran_pow_r8_i4
@@ -28,20 +30,20 @@ package 'stats' in options("defaultPackages") was not found
 > # read data
 > 
 > proTNF_exp <- read.csv('../expdata/combineTNF.csv')
-> proTNF_sim <- read.csv('proTNF_all.csv',header=F)
-> proTNF_sim_tl <- read.csv('proTNF_all_tl.csv',header=F)
-> proTNF_sim_sec <- read.csv('proTNF_all_sec.csv',header=F)
-> proTNF_sim_both <- read.csv('proTNF_all_both.csv',header=F)
+> proTNF_sim <- read.csv('./simData/proTNF_all.csv',header=F)
+> proTNF_sim_tl <- read.csv('./simData/proTNF_all_tl.csv',header=F)
+> proTNF_sim_sec <- read.csv('./simData/proTNF_all_sec.csv',header=F)
+> proTNF_sim_both <- read.csv('./simData/proTNF_all_both.csv',header=F)
 > colnames(proTNF_sim)<-colnames(proTNF_exp)
 > colnames(proTNF_sim_tl)<-colnames(proTNF_exp)
 > colnames(proTNF_sim_sec)<-colnames(proTNF_exp)
 > colnames(proTNF_sim_both)<-colnames(proTNF_exp)
 > 
 > secTNF_exp <- read.csv('../expdata/TNF_secrection.csv')
-> secTNF_sim <- read.csv('sec_all.csv')
-> secTNF_sim_tl <- read.csv('sec_all_tl.csv')
-> secTNF_sim_sec <- read.csv('sec_all_sec.csv')
-> secTNF_sim_both <- read.csv('sec_all_both.csv')
+> secTNF_sim <- read.csv('./simData/sec_all.csv')
+> secTNF_sim_tl <- read.csv('./simData/sec_all_tl.csv')
+> secTNF_sim_sec <- read.csv('./simData/sec_all_sec.csv')
+> secTNF_sim_both <- read.csv('./simData/sec_all_both.csv')
 > colnames(secTNF_sim)<-colnames(proTNF_exp)
 > colnames(secTNF_sim_tl)<-colnames(proTNF_exp)
 > colnames(secTNF_sim_sec)<-colnames(proTNF_exp)
@@ -60,11 +62,11 @@ package 'stats' in options("defaultPackages") was not found
 > 
 > # no regulation
 > matplot(proTNF_sim[,1],proTNF_sim[,2:4],type='l',pch=pchs,col=colors,
-+         lty=rep(1,3),xlab='Time (mins)',ylab='proTNF (sim)',xlim=c(0,120),ylim=c(0,100),
++         lty=rep(1,3),xlab='Time (mins)',ylab='proTNF (sim)',xlim=c(0,120),
 +         main = 'No tl regulation',lwd=2)
 > 
 > matplot(proTNF_sim_tl[,1],proTNF_sim_tl[,2:4],type='l',pch=pchs,col=colors,
-+         lty=rep(1,3),xlab='Time (mins)',ylab='proTNF (sim)',xlim=c(0,120),ylim=c(0,100),
++         lty=rep(1,3),xlab='Time (mins)',ylab='proTNF (sim)',xlim=c(0,120),
 +         main = 'Tl regulation',lwd=2)
 > 
 > 
@@ -127,4 +129,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  0.660   0.078   1.355 
+  0.640   0.065   0.754 
