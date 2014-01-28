@@ -11,7 +11,7 @@ pro_exp = csvread('../expdata/combineTNF.csv',1,0);
 pars = getParams(); % wt parameters
 
 % init condtions:
-k_pr_all = [pars('k_pr') pars('k_pr')/(pars('pr_fold')*3) pars('k_pr')/pars('pr_fold')]; 
+k_pr_all = [pars('k_pr') pars('k_pr')/(pars('pr_fold_mko')) pars('k_pr')/pars('pr_fold_tko')]; 
 kdeg = [.02 .02 .07]; % wt, mko, tko 
 k_tls = [pars('k_tl'),pars('k_tl'),pars('k_tl')/pars('tl_fold')]; 
 
@@ -78,7 +78,8 @@ pars('k_tl') = k_tls(3); % set as tko
 secTNF = cumsum([wt(:,end)*k_secs(1) mko(:,end)*k_secs(2) tko(:,end)*k_secs(3)]);
 
 %% plot
-figure
+%figure()
+figure('Position', [100, 100, 700, 350])
 subplot 241
 plot(t,wt(:,1),'k')
 hold on 
@@ -88,6 +89,7 @@ plot(t,mko(:,1),'Color', [0.5 0 0.5])
 hold off
 xlim([0 120])
 title('nascent sim')
+set(gca,'xtick',0:30:120)
 
 subplot 242
 errorbar(nascent_exp(:,1),nascent_exp(:,2),nascent_exp(:,3),'k')
@@ -98,6 +100,7 @@ errorbar(nascent_exp(:,1),nascent_exp(:,6),nascent_exp(:,3),'c')
 hold off
 xlim([0 120])
 title('nascent exp')
+set(gca,'xtick',0:30:120)
 
 subplot 243 
 plot(t,wt(:,2),'k')
@@ -107,6 +110,7 @@ plot(t,mko(:,2),'Color', [0.5 0 0.5])
 hold off
 xlim([0 120])
 title('mRNA sim')
+set(gca,'xtick',0:30:120)
 
 subplot 244
 errorbar(mRNA_exp(:,1),mRNA_exp(:,2),mRNA_exp(:,3),'k')
@@ -117,6 +121,7 @@ errorbar(mRNA_exp(:,1),mRNA_exp(:,6),mRNA_exp(:,3),'c')
 hold off
 xlim([0 120])
 title('mRNA exp')
+set(gca,'xtick',0:30:120)
 
 % proTNF 
 subplot 245
@@ -127,6 +132,7 @@ plot(t,proTNF(:,2),'Color', [0.5 0 0.5]) %mko
 hold off
 xlim([0 120])
 title('proTNF sim')
+set(gca,'xtick',0:30:120)
 
 subplot 246
 plot(pro_exp(:,1),pro_exp(:,2),'.-k')
@@ -137,6 +143,7 @@ plot(pro_exp(:,1),pro_exp(:,4),'.-c')
 hold off
 xlim([0 120])
 title('proTNF exp')
+set(gca,'xtick',0:30:120)
 
 % sec TNF
 subplot 247
@@ -146,8 +153,12 @@ plot(t,secTNF(:,3),'c') %tko
 plot(t,secTNF(:,2),'Color', [0.5 0 0.5]) % mko
 hold off
 xlim([0 120])
+set(gca,'xtick',0:30:120)
 title('secTNF sim')
-legend('wt','tko','mko')
+set(gca,'xtick',0:30:120)
+
+legend('wt','tko','mko','Location','best')
+legend boxoff 
 subplot 248
 errorbar(sec_exp(:,1),sec_exp(:,2),sec_exp(:,3),'k')
 hold on 
@@ -157,8 +168,9 @@ errorbar(sec_exp(:,1),sec_exp(:,6),sec_exp(:,3),'c')
 hold off
 xlim([0 120])
 title('secTNF exp')
-
-%% save 
+set(gca,'xtick',0:30:120)
+%% 
 saveas(gca,'fig2_4.pdf')
+saveas(gca,'fig2_4.fig')
 close; 
 !open fig2_4.pdf

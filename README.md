@@ -27,6 +27,9 @@ higher)
 - [ ] The tnf feedback should show much effect in CpG but not LPS and
   PIC conditions for both TNF production and NFkB activities.
 - [ ] Solve the delay in CpG induced mRNA profile (fig5d) 
+- [ ] It would better use heatmap to show the supporting of hypothesis
+  (like: stabilization or requirement of para/auto-crine feebback).
+  
 
 
 
