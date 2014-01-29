@@ -166,7 +166,7 @@ i(82)  = i(67);  % C1 + tnf --> C1tnf
 
 % IKKK
 
-i(83)  = 500*0.02;    % IKKK_off --> IKKK (C1 mediated)?500
+i(83)  = 500*0.02*4;    % IKKK_off --> IKKK (C1 mediated)?500
 i(84)  = i(83);  % IKKK_off --> IKKK (C1tnf mediated)
 
 %% the CPG-TLR9 parameters
@@ -201,13 +201,13 @@ t(9) = 0.0154;%.0154 5.8e-2;%tnf secretion rate
 
  %  tnf part (NEW) for figg5b
  t(1) = 1e-5;%tnf constitutive txn 
- t(2) = 10;%tnf induced txn 
- t(3) = 3;%tnf transcription,Hill coefficient
- t(4) = .5;%tnf transcription induction EC50
+ t(2) = 1;%tnf induced txn 
+ t(3) = 2;%tnf transcription,Hill coefficient
+ t(4) = .65;%tnf transcription induction EC50
  t(5) = .02;%tnf transcript deg. max rate ~~~ Could be determined by measurement. 
- t(6) = .02*5;%tnf nascent process rate 
- t(7) = 1;%tnf protein syns rate 
- t(8) = .18;%tnf deg rate 
- t(9) = .18;%tnf secretion rate 
+ t(6) = .4;%tnf nascent process rate 
+ t(7) = .05;%tnf protein syns rate 
+ t(8) = .07;%tnf deg rate 
+ t(9) = .07;%tnf secretion rate 
 
 end

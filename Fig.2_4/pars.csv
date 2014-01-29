@@ -1,0 +1,13 @@
+1,Km_tr,0.65
+2,Km_tr_fold,2.00
+3,V_tr,1.00
+4,k_pr,0.40
+5,k_sec,0.07
+6,k_tl,0.05
+7,kdeg_m,0.02
+8,kdeg_p,0.07
+9,n,2.00
+10,pr_fold_mko,4.20
+11,pr_fold_tko,1.50
+12,sec_fold,5.00
+13,tl_fold,1.50

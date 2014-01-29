@@ -5,10 +5,10 @@ addpath('../src')
 id.dose = 10; %'1','100' 
 id.sim_time = 120;
 id.stimuli = 'LPS'; %LPS, CpG, PIC,TNF. 
-id.output ={'NFkBn','TNFnas', 'TNFmRNA','TNFpro','IKK'};
+id.output ={'NFkBn','TNFnas', 'TNFmRNA','TNF','IKK'};
 %'IKK','nfkb','irf'
 genotypes ={'wt','mko','tko'};
-plot_flag = 1;
+plot_flag = 0;
 id.DT = 1;
 
 feedback_flags = [1, 0];
@@ -50,7 +50,7 @@ for k = 1:2
     tnfNas    = [sim{1}(2,:);sim{2}(2,:);sim{3}(2,:)];
     tnfmRNA   = [sim{1}(3,:);sim{2}(3,:);sim{3}(3,:)];
     tnfPro    = [sim{1}(4,:);sim{2}(4,:);sim{3}(4,:)];
-    tnfSec    = cumsum([sim{1}(4,:)*tp(9);sim{2}(4,:);sim{3}(4,:)*tp(9)/2.5]');
+    tnfSec    = cumsum([sim{1}(4,:)*tp(9);sim{2}(4,:)*tp(9);sim{3}(4,:)*tp(9)/5]');
     IKK    = [sim{1}(5,:);sim{2}(5,:);sim{3}(5,:)];
     %%
     t = 0:120;
