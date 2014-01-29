@@ -1,19 +1,19 @@
 function residues = calScoreCustom(input_pars,mRNA_all)
 
 % params
-plot_flag = 0;
+plot_flag = 1;
 pars = getParams(); % wt parameters
 
 % input pars
-pars('tl_fold') = input_pars(1);
-pars('sec_fold') = input_pars(2);
+pars('kdeg_p') = input_pars(1);
+pars('k_sec') = input_pars(2);
 
 %% simulations
 % proTNF
 k_tls = [pars('k_tl'),pars('k_tl'),pars('k_tl')/pars('tl_fold')]; 
 yinit_all = mRNA_all(1,[2,4,6]).*k_tls/pars('kdeg_p'); % init 
 
-times = 0:.1:max(mRNA_all(:,1));%mRNA_all(:,1);
+times = 0:.1:120;%max(mRNA_all(:,1));%mRNA_all(:,1);
 
 [t,proTNF_wt]= ode15s(@ode4,times,yinit_all(1),[],[],mRNA_all(:,1:2), ...
                     pars);
@@ -50,14 +50,17 @@ simData_secTNF = [cumsum([TNF_wt*k_secs(1) TNF_mko*k_secs(2) TNF_tko*k_secs(3)])
 % plot 
 if plot_flag
     figure
-    subplot(2,2,1)
-    plot(times,simData)
-    hold off
+    subplot(2,1,1)
+    plot(times,simData_proTNF)
+    xlim([0 120])
+    subplot(2,1,2)
+    plot(times,simData_secTNF)
+    xlim([0 120])
 end
 
 %% calculate score 
 % features of proTNF
-residues = zeros(1,13); % 
+residues = zeros(1,14); % 
 
 [max_val, max_ind] = max(simData_proTNF);
 max_time = (max_ind-1)*0.1;
@@ -71,16 +74,16 @@ residues(6) = (simData_proTNF(1201,1)/max_val(1) - 0.2)/.04;
 residues(7) = (simData_proTNF(1201,1)/simData_proTNF(1201,3) - 3.9)/.65;
 residues(8) = (simData_proTNF(1201,1)/simData_proTNF(1201,2) - 14)/2.3; % wt_120 /
                                                           % tko_120
-
+residues(9) = (simData_secTNF(301,3)/simData_secTNF(301,2) - 0.75)/.12;
 % features of SecTNF
 [max_val, max_ind] = max(simData_secTNF);
 max_time = (max_ind-1)*0.1;
 
-residues(9) = (simData_secTNF(601,3)/simData_secTNF(601,1) - 0.17)/.03;
-residues(10) = (simData_secTNF(601,2)/simData_secTNF(601,3) - 1.4)/.54;
-residues(11) = (simData_secTNF(1201,3)/simData_secTNF(1201,1) - .17)/.03;
-residues(12) = (simData_secTNF(1201,2)/simData_secTNF(1201,3) - 1.9)/.76;
-residues(13) = (simData_secTNF(1201,1)/simData_secTNF(601,1) - 1.2)/.16;
+residues(10) = (simData_secTNF(601,3)/simData_secTNF(601,1) - 0.17)/.03;
+residues(11) = (simData_secTNF(601,2)/simData_secTNF(601,3) - 1.4)/.54;
+residues(12) = (simData_secTNF(1201,3)/simData_secTNF(1201,1) - .17)/.03;
+residues(13) = (simData_secTNF(1201,2)/simData_secTNF(1201,3) - 1.9)/.76;
+residues(14) = (simData_secTNF(1201,1)/simData_secTNF(601,1) - 1.2)/.16;
 
 
 

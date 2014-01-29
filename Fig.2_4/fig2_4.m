@@ -9,7 +9,8 @@ pro_exp = csvread('../expdata/combineTNF.csv',1,0);
 
 % read pars
 pars = getParams(); % wt parameters
-
+pars('kdeg_p') = log(2)/10;
+pars('k_sec') =  log(2)/10;
 % init condtions:
 k_pr_all = [pars('k_pr') pars('k_pr')/(pars('pr_fold_mko')) pars('k_pr')/pars('pr_fold_tko')]; 
 kdeg = [.02 .02 .07]; % wt, mko, tko 

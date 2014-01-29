@@ -6,15 +6,21 @@ mRNA_exp = csvread('../expdata/mRNA.csv',1,0);
 %% pro TNF
 N = 10;
 M = 10;
-tl_fold = linspace(0.5,10,N);
-sec_fold = linspace(0.5,10,M);
+%tl_fold = linspace(0.5,10,N);
+%sec_fold = linspace(0.5,10,M);
+
+k_degPs = linspace(0.01,0.1,N);
+k_secs = linspace(0.1,1,M);
+
 plot_flag = 1; 
+
 %
 for i = 1:N
     for j = 1:M
         
-        input_pars(1) = tl_fold(i);
-        input_pars(2) = sec_fold(j);
+
+        input_pars(1) = k_degPs(i);
+        input_pars(2) = k_secs(j);        
         
         % calculate residues
         residues = calScoreCustom(input_pars,mRNA_exp);
@@ -23,14 +29,14 @@ for i = 1:N
 
     end
 end
-save ./simData/fig4s.mat 
+save ./simData/fig4s2.mat 
 
 %%
 figure
 if plot_flag
-    imagesc(sec_fold,tl_fold,log10(score))
+    imagesc(k_secs,k_degPs,log10(score))
     colorbar
-    xlabel('ksec_{fold}');ylabel('ktl_{fold}');
+    xlabel('k_{sec}');ylabel('k_{degP}');
     h = colorbar;
     ylabel(h,'log10(\chi^2)')
 end 
