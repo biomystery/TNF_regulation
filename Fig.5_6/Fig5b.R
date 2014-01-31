@@ -9,7 +9,12 @@ mRNA_exp <- read.csv('../expdata/mRNA.csv')
 sec_exp <- read.csv('../expdata/TNF_secrection.csv')
 
 
-# read simulation data 
+# read simulation data
+nfkb_sim_nf<- read.csv('./simData/nfkb_sim_nf.csv')
+nascent_sim_nf <- read.csv('./simData/nascent_sim_nf.csv')
+mRNA_sim_nf <- read.csv('./simData/mRNA_sim_nf.csv')
+sec_sim_nf <- read.csv('./simData/sec_sim_nf.csv')
+
 nfkb_sim <- read.csv('./simData/nfkb_sim.csv')
 nascent_sim <- read.csv('./simData/nascent_sim.csv')
 mRNA_sim <- read.csv('./simData/mRNA_sim.csv')
@@ -33,6 +38,7 @@ pchs <- c(18,17,15)
 # nfkb plot
 matplot(nfkb_exp[,1],nfkb_exp[,2:4],type='o',pch=pchs,col=colors,
         lty=rep(1,3),xlab='Time (mins)',ylab='NFkB (exp)',xlim=xlim,lwd=2)
+
 title(main = "Experimental data",col.main='red')
 
 # nascnet plot
@@ -55,22 +61,32 @@ legend("topleft",c("wt","mko","tko"),lty=rep(1,3),pch=pchs,col=colors,bty="n")
 # nfkb plot
 matplot(nfkb_sim[,1],nfkb_sim[,2:4],type='l',col=colors,
         lty=rep(1,3),xlab='Time (mins)',ylab='NFkB (sim)',xlim=xlim,lwd=2)
+matlines(nfkb_sim_nf[,1],nfkb_sim_nf[,2:4],type='l',col=colors,
+        lty=rep(2,3),xlab='Time (mins)',ylab='NFkB (sim)',xlim=xlim,lwd=2)
 
 title(main = "Simulation",col.main='red')
 
 # nascnet plot
 matplot(nascent_sim[,1],nascent_sim[,2:4],type='l',col=colors,
         lty=rep(1,3),xlab='Time (mins)',ylab='Nascent (sim)',xlim=xlim,lwd=2)
+matlines(nascent_sim_nf[,1],nascent_sim_nf[,2:4],type='l',col=colors,
+        lty=rep(2,3),xlab='Time (mins)',ylab='Nascent (sim)',xlim=xlim,lwd=2)
 
 # mRNA plot
 matplot(mRNA_sim[,1],mRNA_sim[,2:4],type='l',col=colors,
         lty=rep(1,3),xlab='Time (mins)',ylab='mRNA (sim)',xlim=xlim,lwd=2)
+matlines(mRNA_sim_nf[,1],mRNA_sim_nf[,2:4],type='l',col=colors,
+        lty=rep(2,3),xlab='Time (mins)',ylab='mRNA (sim)',xlim=xlim,lwd=2)
 
 #axis(2,at = c(0,.7,1.4)*.8,labels = c(0,40,80))
 # sec exp plot 
 matplot(sec_sim[,1],sec_sim[,2:4],type='l',col=colors,
         lty=rep(1,3),xlab='Time (mins)',ylab='secTNF (sim)',xlim=xlim,lwd=2)
 legend("topleft",c("wt","mko","tko"),lty=rep(1,3),pch=rep(NA,3),col=colors,bty="n")
+
+matlines(sec_sim_nf[,1],sec_sim_nf[,2:4],type='l',col=colors,
+        lty=rep(2,3),xlab='Time (mins)',ylab='secTNF (sim)',xlim=xlim,lwd=2)
+
 #axis(2,at = c(0,16,32,48),labels = c(0,400,800,1200))
 
 # end and open the pdf 

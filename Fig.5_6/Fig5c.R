@@ -57,7 +57,7 @@ title(main = "Simulation")
 
 # elisa plot
 matplot(sec_sim[,1],sec_sim[,2:4],type='l',col=colors,
-        lty=rep(1,3),xlab='Time (mins)',ylab='Secreted TNF (sim)',xlim=xlim,xaxt ='n',lwd=2)
+        lty=rep(1,3),xlab='Time (mins)',ylab='Secreted TNF (sim)',xlim=xlim,xaxt ='n',lwd=2,ylim=c(0,1.5))
 matlines(sec_sim_no_feedback[,1],sec_sim_no_feedback[,2:4],type='l',col=colors,
         lty=rep(2,3),lwd=2)#,xlab='Time (mins)',ylab='Secreted TNF (sim)',xlim=xlim,xaxt ='n',lwd=2)
 

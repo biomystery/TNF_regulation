@@ -1,5 +1,13 @@
 close all; clear; 
 addpath('../src')
+
+nfkb_file ={'./simData/nfkb_sim_nf.csv', './simData/nfkb_sim.csv'};
+nascent_file = {'./simData/nascent_sim_nf.csv','./simData/nascent_sim.csv'};
+mRNA_file = {'./simData/mRNA_sim_nf.csv','./simData/mRNA_sim.csv'};
+prot_file = {'./simData/prot_sim_nf.csv','./simData/prot_sim.csv'};
+sec_file = {'./simData/sec_sim_nf.csv','./simData/sec_sim.csv'};
+
+
 %% wt simulation
 % 1. low dose, wt
 id.dose = 10; %'1','100' 
@@ -54,11 +62,12 @@ for k = 1:2
     IKK    = [sim{1}(5,:);sim{2}(5,:);sim{3}(5,:)];
     %%
     t = 0:120;
-    csvwrite('./simData/nfkb_sim.csv',[t;nfkbn]')
-    csvwrite('./simData/nascent_sim.csv',[t;tnfNas]')
-    csvwrite('./simData/mRNA_sim.csv',[t;tnfmRNA]')
-    csvwrite('./simData/prot_sim.csv',[t;tnfPro]')
-    csvwrite('./simData/sec_sim.csv',[t;tnfSec']')
+    
+    csvwrite(nfkb_file{k},[t;nfkbn]')
+    csvwrite(nascent_file{k},[t;tnfNas]')
+    csvwrite(mRNA_file{k},[t;tnfmRNA]')
+    csvwrite(prot_file{k},[t;tnfPro]')
+    csvwrite(sec_file{k},[t;tnfSec']')
 end
 
 % end
