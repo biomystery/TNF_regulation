@@ -8,8 +8,11 @@ pr_fold_mko = 4.5;%input_pars(1);
 pr_fold_tko = 1.5;%input_pars(2);
 kdeg_m = [.02 .02 .07]; % wt, mko, tko 
 
-pars('k_pr') = input_pars(1);
+%pars('k_pr') = input_pars(1);
+kdeg_m(1) = input_pars(1);
+kdeg_m(2) = input_pars(1);
 kdeg_m(3) = input_pars(2); 
+pars('kdeg_m_basal') = kdeg_m(3);
 
 k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold_mko pars('k_pr')/pr_fold_tko]; 
 yinit = nascent_exp(1,2:end) .* k_pr_all/kdeg_m(3);
@@ -21,6 +24,7 @@ times = 0:.1:120;%nascent_all(:,1);
 % wt
 pars('k_pr') = k_pr_all(1);
 pars('kdeg_m') = kdeg_m(1);
+
 [t,wt]= ode15s(@ode3,times,yinit(:,1),[],[],nascent_exp(:,1:2), ...
                        pars);
 
