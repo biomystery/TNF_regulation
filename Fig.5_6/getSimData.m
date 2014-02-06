@@ -15,17 +15,22 @@ v.STIMULI  = id.stimuli;
 % Stimuli
 if strcmp(id.stimuli,'LPS')
     v.DOSE = id.dose*v.IP(52);
+
 elseif strcmp(id.stimuli,'TNF')
     v.DOSE = id.dose*(1.96e-4);      % 1.96e-4uM= 1ng/mL TNF;
 
 elseif strcmp(id.stimuli,'CpG') %tko
-    v.DOSE = id.dose*(1.96e-4); % no transmition yet
-    v.TP(4) = v.TP(4) /3;% EC50 nfkb activate tnf
+    v.DOSE = id.dose*(1.96e-4)*100; % no transmition yet
+    v.TP(2) = 0.03 ;% EC50 nfkb activate tnf        
+    v.TP(4) = 0.02;% EC50 nfkb activate tnf
     v.TP(5) = .07;         % NEW mRNA stability
     v.TP(6) = v.TP(6)/1.5; % NEW process rate 
     v.TP(9) = v.TP(9)/5; % NEW sec rate 
     v.TP(7) = v.TP(7)/1.5; % NEW tl rate     
-    v.IP(90) = v.IP(90); % NEW tl rate         
+    v.IP(90) = v.IP(90); % EC50 for MyD88 activation     
+    v.IP(87)   = .6;     % CpG +  TLR9 -> CpGTLR9, affinity : 186 nM ± 35 nM
+    v.IP(88)   = 2.7; % CpGTLR9 -> CpG +  TLR9 1 × 104 M-1 s-1, 6 mins half-life
+    
     
 elseif strcmp(id.stimuli,'PIC') % mko 
     v.DOSE = id.dose*(1.96e-4); % no transmistion yet

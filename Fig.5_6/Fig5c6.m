@@ -1,4 +1,5 @@
 close all; clear;
+addpath('../src/')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 1. simulation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6,7 +7,7 @@ close all; clear;
 % setting up the parameters 
 id.genotype = 'wt';
 feedback_flags = [1, 0]; % no feedback and feedback
-id.output ={'TNFmRNA','TNFpro','NFkBn','IKK','MyD88s','TRIFs','CpG', ...
+id.output ={'TNFmRNA','TNFpro','NFkBn','IKK','MyD88s','TRIFs','C1tnf_off','C1tnf','CpG', ...
             'CpGTLR9','PIC','PICTLR3','TLR4LPS'};
 mRNA_filenames = {'./simData/mRNA_sim.csv','./simData/mRNA_sim_feedback.csv'};
 sec_filenames = {'./simData/sec_sim.csv',['./simData/' ...
@@ -16,7 +17,7 @@ nfkbn_filenames = {'./simData/nfkb_sim_nofeedback.csv','./simData/nfkb_sim_feedb
 id.DT = 1;
 id.sim_time = 480;
 t = 0:id.sim_time;
-plot_flag = 0;
+plot_flag = 1;
 stimuli.name= {'LPS','CpG','PIC','TNF'};
 
 stimuli.dose= [100,100,50,1]; % 10ng/ml, 100nM, 50 ug/ml 
@@ -43,11 +44,12 @@ for k = 1:2
             end
             
             for i=1:size(id.output,2)
-                subplot(4,3,i);
+                subplot(4,4,i);
                 hold on
                 plot(sim{j}(i,:),styles{k},'linewidth',2);
                 xlim([0 id.sim_time]);set(gca,'xtick',0:60:360);
                 title(id.output{i})
+                xlim([0 240])
             end
         end
     end

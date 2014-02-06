@@ -12,10 +12,11 @@ threshold   = 1;        % Max % difference used by evaluate_phase1()
 initial_values = v.INITVALUES{1};
 v.BASAL_VALUES = [];
 
-if  ~v.flag_noTnfFeedback
-    tmp = v.IP(54);
-    v.IP(54) = 0; 
-end
+% Block TNFR synthesis in order to reach steay-state. 
+ if  ~v.flag_noTnfFeedback %with feedback. 
+     tmp = v.IP(54);
+     v.IP(54) = 0; 
+ end
 
 while ~static % Iterate through Phase 1 until equilibrium is reached
     options = odeset('RelTol', 1e-4);
@@ -40,7 +41,7 @@ while ~static % Iterate through Phase 1 until equilibrium is reached
 end
 disp(count)
 
-if  ~v.flag_noTnfFeedback
+if  ~v.flag_noTnfFeedback %with feedback
     v.IP(54) = tmp; 
 end
 %% subsubroutine static
