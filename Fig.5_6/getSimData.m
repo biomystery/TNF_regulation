@@ -15,7 +15,8 @@ v.STIMULI  = id.stimuli;
 % Stimuli
 if strcmp(id.stimuli,'LPS')
     v.DOSE = id.dose*v.IP(52);
-
+    %    v.TP(4) = 0.05;% EC50 nfkb activate tnf
+    %    v.TP(2) = 0.05 ;% EC50 nfkb activate tnf            
 elseif strcmp(id.stimuli,'TNF')
     v.DOSE = id.dose*(1.96e-4);      % 1.96e-4uM= 1ng/mL TNF;
 
@@ -39,21 +40,17 @@ elseif strcmp(id.stimuli,'PIC') % mko
     v.TP(4) = v.TP(4) ;% 10 fold higher threshold. 
 end
 
-% TNF feedback: controlled by TNF receptor  
-v.flag_noTnfFeedback = id.flag_noTnfFeedback;
-if id.flag_noTnfFeedback
-    v.IP(54) = 0; 
-end
 
 v.INITVALUES = getInit();
 
-% mutant , mko and tko and wt
 switch id.genotype
   case 'mko' %PIC
+
     v.INITVALUES{1}(25)=0; %myd88
-    v.TP(6) = v.TP(6)/4.2; % NEW process rate
+    v.TP(6) = v.TP(6)/4.2; % NEW process rate 4.2
     v.TP(4) = v.TP(4) * 1.5;% 10 fold higher threshold.     
   case 'tko' % CpG
+
     v.INITVALUES{1}(27)=0;
     v.TP(5) = .07;         % NEW mRNA stability
     v.TP(6) = v.TP(6)/1.5; % NEW process rate 
@@ -62,6 +59,12 @@ switch id.genotype
   case 'wt'
     v.IP(24:25) = v.IP(49:50);
 end
+% TNF feedback: controlled by TNF receptor  
+v.flag_noTnfFeedback = id.flag_noTnfFeedback;
+if id.flag_noTnfFeedback
+    v.IP(54) = 0; 
+end
+
 
 % Run
 v  = nfkbRunPar(v) ;
