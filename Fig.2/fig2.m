@@ -3,7 +3,7 @@ addpath('../src/')
 nfkb_exp = csvread('../expdata/nfkb.csv',1,0);
 plot_flag = 0; 
 pars = getParams(); % wt parameters
-pr_fold = [pars('pr_fold')*3 pars('pr_fold')];
+pr_fold = [pars('pr_fold_mko') pars('pr_fold_tko')];
 k_pr = pars('k_pr');
 
 filenames = {'./simData/different_pr.csv','./simData/same_pr.csv'};
