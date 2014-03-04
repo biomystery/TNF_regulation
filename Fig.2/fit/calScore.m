@@ -17,6 +17,7 @@ pars('k_pr') = input_pars(2);
 pr_fold_mko = input_pars(3);
 pr_fold_tko = input_pars(4);
 pars('n') = input_pars(5); 
+scale = input_pars(6);
 %scale = input_pars(6)
 
 k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold_mko pars('k_pr')/pr_fold_tko]; 
@@ -43,17 +44,22 @@ pars('k_pr') = k_pr_all(3);
 simData = [nascent_wt nascent_mko nascent_tko];
 
 % rescaling:
-simData = simData/max(simData(:));
-expData(:,2:end) = expData(:,2:end)/max(max(expData(:,2:end)));
+simData = simData/scale;
 
 
 % plot 
 if plot_flag
-    subplot(2,2,1)
-    plot(expData(:,1),expData(:,[2,4,6]),'*')
+    %    subplot(2,2,1)
+    errorbar(expData(:,1),expData(:,2),expData(:,3),'*','Color',[0 0 1])
     hold on 
+    errorbar(expData(:,1),expData(:,4),expData(:,5),'*','Color',[0 .5 ...
+                        0])
+    errorbar(expData(:,1),expData(:,6),expData(:,7),'*','Color',[1 0 ...
+                        0 ])
     plot(times,simData)
     hold off
+    xlim([0 120])
+    ylim([0 30])
 end
 
 

@@ -1,7 +1,7 @@
 % read data from R 
 addpath('../../src/')
 
-p = log10([0.5 0.6 1.5 1.5 3]);
+p = parsFinal;%log10([0.5 0.6 1.5 1.5 3]);
 %p = log10([1 1 1 1 1]); 
 for i = 1:1
     %p = parsFinal;% + log10(1+(rand(1,5)-0.5)*.4);
@@ -12,7 +12,7 @@ for i = 1:1
                       'TolFun',1e-10,'TolX',1e-10); 
 
     [parsFinal,resnorm,residual,~,~,~,jacobian] = lsqnonlin(@ ...
-                                                      calScoreCustom,p,lb, ...
+                                                      calScore,p,lb, ...
                                                       ub,options);
     chisq = resnorm/(7-5-1); 
     save fitCust.mat
