@@ -10,8 +10,8 @@ sec_file = {'./simData/sec_sim_nf.csv','./simData/sec_sim.csv'};
 
 %% wt simulation
 % 1. low dose, wt
-id.dose = 10; %'1','100' 
-id.sim_time = 120;
+id.dose = 100; %'1','100' 
+id.sim_time = 120*2;
 id.stimuli = 'LPS'; %LPS, CpG, PIC,TNF. 
 id.output ={'NFkBn','TNFnas', 'TNFmRNA','TNF','IKK'};
 %'IKK','nfkb','irf'
@@ -61,7 +61,7 @@ for k = 1:2
     tnfSec    = cumsum([sim{1}(4,:)*tp(9);sim{2}(4,:)*tp(9);sim{3}(4,:)*tp(9)/5]');
     IKK    = [sim{1}(5,:);sim{2}(5,:);sim{3}(5,:)];
     %%
-    t = 0:120;
+    t = 0:id.sim_time;
     
     csvwrite(nfkb_file{k},[t;nfkbn]')
     csvwrite(nascent_file{k},[t;tnfNas]')

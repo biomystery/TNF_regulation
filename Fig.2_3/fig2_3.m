@@ -7,7 +7,8 @@ mRNA_exp = csvread('../expdata/mRNA.csv',1,0);
 plot_flag = 0; 
 
 pars = getParams(); % wt parameters
-
+pars('pr_fold_mko') = 4.5;
+pars('pr_fold_tko') = 1.1;
 k_pr_all = [pars('k_pr') pars('k_pr')/(pars('pr_fold_mko')) pars('k_pr')/pars('pr_fold_tko')]; 
 kdeg = [.02 .02 .07]; % wt, mko, tko 
 
@@ -19,6 +20,7 @@ yinit_all(2,:) = yinit_all(1,:).*k_pr_all/kdeg(3);
 times = 0:.1:120;%nascent_all(:,1);
 
 % wt 
+pars('kdeg_m') = kdeg(1);
 [t,wt]= ode15s(@ode23,times,yinit_all(:,1),[],[],nfkb_exp(:,1:2), ...
                pars);
 % mko 

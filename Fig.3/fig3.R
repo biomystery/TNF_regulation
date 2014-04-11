@@ -1,4 +1,4 @@
-nascent <- read.csv('../expdata/nascent.csv')
+ nascent <- read.csv('../expdata/nascent.csv')
 mRNA_predict <- read.csv('./simData/mRNA_all.csv',header=F,
                          col.names=c('Time_mins','wt','mko','tko'))
 mRNA_expdata <- read.csv('../expdata/mRNA.csv')

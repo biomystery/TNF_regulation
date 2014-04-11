@@ -6,12 +6,19 @@ pars = getParams(); % wt parameters
 pr_fold = [pars('pr_fold_mko') pars('pr_fold_tko')];
 k_pr = pars('k_pr');
 
-filenames = {'./simData/different_pr.csv','./simData/same_pr.csv'};
 
-for i =1:2
-    pars('pr_fold') = pr_fold(i);
+% set up the file name to same the simulate data 
+filenames = {'./simData/different_pr.csv','./simData/same_pr.csv'}; %
+
+
+for i =1:2 % different pr vs same pr. 
+    if i ==1
     k_pr_all = [pars('k_pr') pars('k_pr')/pr_fold(1) ...
                 pars('k_pr')/pr_fold(2)];
+    else
+    k_pr_all = [pars('k_pr') pars('k_pr') ...
+                pars('k_pr')];
+    end
     
     yinit_all = pars('V_tr')* nfkb_exp(1,2:end).^pars('n')./(nfkb_exp(1, ...
                                                       2:end).^pars('n')+pars('Km_tr')^pars('n'))./k_pr_all;

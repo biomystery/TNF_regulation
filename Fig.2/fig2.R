@@ -43,3 +43,11 @@ legend('bottom',c("wt","mko","tko"),lty=rep(1,3),pch=pchs,col=colors,bty="n",cex
 dev.off()
 system('open fig2.pdf')
 
+
+pdf(file='fig2s.pdf', height=3, width=3, onefile=F, family='Helvetica', paper='special', pointsize=10)
+matplot(nascent_predict[,1],nascent_predict[,2:4],type='l',col=colors,
+        lty=rep(1,3),xlab='Time (mins)',ylab='Nascent (AU) ',
+        xlim=c(0,120),lwd=2,main='Same processing rate')
+
+dev.off()
+system('open fig2s.pdf') 
