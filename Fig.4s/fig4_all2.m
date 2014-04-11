@@ -13,10 +13,10 @@ expData2(5:6,:) = [];
 
 plot_flag = 1; 
 N = 10;
-M = 10;
+M = 9;
 
 degp_rate =linspace(.1,1,10);
-sec_rate =linspace(1,10,10);
+sec_rate = linspace(1,5,9);
 
 score = zeros(N,M);
 
@@ -38,7 +38,7 @@ figure('units','inch','position',[12 6 12 3])
 subplot 131
 if plot_flag
     imagesc(sec_rate,degp_rate,score)
-    ylabel('kdeg_{p}(min^{-1})');xlabel('k_{sec}');
+    ylabel('kdeg_{p}(min^{-1})');xlabel('fold_{sec}tko');
     h = colorbar;
     ylabel(h,'RMSD')
 end 
@@ -58,15 +58,15 @@ xlabel('Time (min)');ylabel('secTNF (a.u.)')
 
 text(20,1.3,strcat('RMSD=',num2str(minimal_score)))
 text(20,1.15,strcat('kdeg_p=',num2str(degp_rate(i(1)))))
-text(20,1,strcat('k_{sec}=',num2str(sec_rate(j(1)))))
+text(20,1,strcat('fold_{sec}tko=',num2str(sec_rate(j(1)))))
 set(gcf,'Units','inches');
 screenposition = get(gcf,'Position');
 set(gcf,...
     'PaperPosition',[0 0 screenposition(3:4)],...
     'PaperSize',[screenposition(3:4)]);
 
-print -dpdf -painters fig4s_all_nonLinSec.pdf
-saveas(gca,'fig4s_all_nonLinSec.fig')
-close all; !open fig4s_all_nonLinSec.pdf
+print -dpdf -painters fig4s_all_nonLinSec_sec.pdf
+saveas(gca,'fig4s_all_nonLinSec_sec.fig')
+close all; !open fig4s_all_nonLinSec_sec.pdf
 
-save ./simData/fig4s_all_nonLinSec.mat 
+save ./simData/fig4s_all_nonLinSec_sec.mat 

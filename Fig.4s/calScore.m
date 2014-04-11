@@ -5,14 +5,18 @@ function residues = calScore(input_pars,mRNA_exp,expData,plot_flag)
 pars = getParams(); % wt parameters
 
 pars('kdeg_p') = input_pars(1); % input parameters
-pars('k_tl') = .2; 
+pars('k_tl') = 1; 
 pars('k_sec') = input_pars(2);
 pars('km_sec') = 2; 
 
-fold_tl_tko = 1;%input_pars(2); % input parameters
+fold_tl_tko =1;%input_pars(1); % input parameters
+fold_sec_tko = 1;%input_pars(2);
+
 ktls = [pars('k_tl') pars('k_tl') pars('k_tl')/fold_tl_tko];
 
-yinit = mRNA_exp(1,2:end).*ktls/(pars('kdeg_p') + pars('k_sec')); % init 
+ksecs = [pars('k_sec') pars('k_sec') pars('k_sec')/fold_sec_tko];
+
+yinit = mRNA_exp(1,2:end).*ktls./(pars('kdeg_p') + ksecs);%pars('k_sec')); % init 
 times = 0:.1:120;%nascent_all(:,1);
 
 %% simulations
@@ -23,6 +27,7 @@ times = 0:.1:120;%nascent_all(:,1);
 [t,mko]= ode15s(@ode4_1,times,yinit(:,2),[],[],mRNA_exp(:,[1,3]), ...
                        pars);
 pars('k_tl') = ktls(3); 
+pars('k_secs') = ksecs(3); 
 [t,tko]= ode15s(@ode4_1,times,yinit(:,3),[],[],mRNA_exp(:,[1,4]), ...
                        pars);
 
