@@ -7,7 +7,7 @@ pars = getParams(); % wt parameters
 pars('kdeg_p') = input_pars(1); % input parameters
 pars('k_tl') = 1; 
 pars('k_sec') = input_pars(2);
-pars('km_sec') = 2; 
+pars('km_sec') = 2000; 
 
 fold_tl_tko =1;%input_pars(1); % input parameters
 fold_sec_tko = 1;%input_pars(2);
