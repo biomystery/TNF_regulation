@@ -1,4 +1,4 @@
-function residues = calScore(input_pars,mRNA_exp,expData,plot_flag)
+function residues = calScore2(input_pars,mRNA_exp,expData,plot_flag)
 
 % params
 %plot_flag = 1;
@@ -9,7 +9,7 @@ pars('k_tl') = 1;
 
 
 
-fold_tl_tko =1;%input_pars(1); % input parameters
+fold_tl_tko =input_pars(2); % input parameters
 fold_sec_tko = 1;%input_pars(2);
 
 ktls = [pars('k_tl') pars('k_tl') pars('k_tl')/fold_tl_tko];

@@ -1,4 +1,4 @@
-function residues = calScoreb(input_pars,mRNA_exp,expData,plot_flag)
+function residues = calScoreb2(input_pars,mRNA_exp,expData,plot_flag)
 
 % params
 %plot_flag = 1;
@@ -6,11 +6,11 @@ pars = getParams(); % wt parameters
 
 pars('kdeg_p') = input_pars(1); % input parameters
 pars('k_tl') = 1; 
-pars('k_sec') = input_pars(2);
+pars('k_sec') = 1;%input_pars(2);
 
 
 fold_tl_tko =1;%input_pars(2); % input parameters
-fold_sec_tko =1;% input_pars(2);
+fold_sec_tko = input_pars(2);
 
 ktls = [pars('k_tl') pars('k_tl') pars('k_tl')/fold_tl_tko];
 ksecs = [pars('k_sec') pars('k_sec') pars('k_sec')/fold_sec_tko];

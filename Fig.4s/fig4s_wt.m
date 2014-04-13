@@ -32,8 +32,10 @@ if plot_flag
 end 
 
 % find minimal 
-minimal_score = min(score);
-j = find(score == minimal_score);
+minimal_score = min(score(:));
+j = find(min(score) == minimal_score);
+i = find(score(:,j) == minimal_score); 
+
 subplot 122; calScore_wt(degp_rate(j),mRNA_exp,expData,1);
 xlim([0 121]);ylim([0 1.4])
 xlabel('Time (min)');ylabel('proTNF (a.u.)')
