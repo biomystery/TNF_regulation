@@ -9,16 +9,18 @@ proTNF_exp = csvread('../../expdata/combineTNF.csv',1,0);
 
 
 mRNA_exp = mRNA_exp(1:4,:);
+
+mRNA_exp(:,2:end) = mRNA_exp(:,2:end)/max(mRNA_exp(:,2));
+nascent_exp(:,2:end) = nascent_exp(:,2:end)/max(nascent_exp(:,2));
+secTNF_exp(:,2:end) = secTNF_exp(:,2:end)/max(secTNF_exp(:,2));
 secTNF_exp = secTNF_exp(1:4,:);
-mRNA_exp(:,2:end) = mRNA_exp(:,2:end)/max(max(mRNA_exp(:,2:end)));
-nascent_exp(:,2:end) = nascent_exp(:,2:end)/max(max(nascent_exp(:,2:end)));
-secTNF_exp(:,2:end) = secTNF_exp(:,2:end)/max(max(secTNF_exp(:,2:end)));
-proTNF_exp(:,2:end) = proTNF_exp(:,2:end)/max(max(proTNF_exp(:,2:end)));
+proTNF_exp(:,2:end) = proTNF_exp(:,2:end)/max(proTNF_exp(:,2));
 proTNF_exp = [proTNF_exp(:,1:2) proTNF_exp(:,2)*.2 proTNF_exp(:,3) proTNF_exp(:,3)*.2 ...
            proTNF_exp(:,4) proTNF_exp(:,4)*.2]; 
 
 % params
 plot_flag = 1;
+
 pars = getParams(); % wt parameters
 
 input_pars = 10.^input_pars;
@@ -27,18 +29,14 @@ pars('Km_tr') = input_pars(1);
 pars('k_pr') = input_pars(2);
 pars('pr_fold_mko') = input_pars(3);
 pars('pr_fold_tko') = input_pars(4);
-pars('n') = input_pars(5); 
-nascent_scale = input_pars(6);
-mRNA_scale = input_pars(7);
-pars('Km_tr_fold') = input_pars(8);
+pars('n') = 2; 
+pars('Km_tr_fold') = input_pars(5);
 
-pars('k_tl') = input_pars(9);
-pars('tl_fold') = input_pars(10);
-pars('sec_fold') = input_pars(11);
-pars('k_sec') = input_pars(12);
-pars('kdeg_P') = input_pars(13);
-proTNF_scale = input_pars(14);
-secTNF_scale = input_pars(15);
+pars('k_tl') = input_pars(6);
+pars('tl_fold') = input_pars(7);
+pars('sec_fold') = input_pars(8);
+pars('k_sec') = input_pars(9);
+pars('kdeg_P') = input_pars(10);
 
 k_pr_all = [pars('k_pr') pars('k_pr')/(pars('pr_fold_mko')) pars('k_pr')/pars('pr_fold_tko')]; 
 kdeg = [.02 .02 .07]; % wt, mko, tko 
@@ -75,9 +73,9 @@ pars('k_tl') = k_tls(3); % set as tko
 
 
 % get date
-simData_nascent = [wt(:,1) mko(:,1) tko(:,1)];
-simData_mRNA = [wt(:,2) mko(:,2) tko(:,2)];
-simData_proTNF = [wt(:,end) mko(:,end) tko(:,end)];
+simData_nascent = [wt(:,1) mko(:,1) tko(:,1)]/max(wt(:,1));
+simData_mRNA = [wt(:,2) mko(:,2) tko(:,2)]/max(wt(:,2));
+simData_proTNF = [wt(:,end) mko(:,end) tko(:,end)]/max(wt(:,end));
 
 %% secretion 
 pars = getParams(); % set as default
@@ -113,63 +111,54 @@ pars('k_tl') = k_tls(3); % set as tko
                     4]),pars);
 
 
-simData_secTNF = cumsum([wt(:,end)*k_secs(1) mko(:,end)*k_secs(2) tko(:,end)*k_secs(3)]);
+simData_secTNF = cumsum([wt(:,end)*k_secs(1) mko(:,end)*k_secs(2) ...
+                    tko(:,end)*k_secs(3)]);
+simData_secTNF = simData_secTNF/max(simData_secTNF(:,1));
 
-% scale
-simData_nascent = simData_nascent/nascent_scale;
-simData_mRNA = simData_mRNA/mRNA_scale;
-simData_proTNF = simData_proTNF/proTNF_scale;
-simData_secTNF =simData_secTNF/secTNF_scale; 
 
 
 % plot
 if plot_flag
     subplot(2,2,1)
-    errorbar(nascent_exp(:,1),nascent_exp(:,2),nascent_exp(:,3),'*','Color',[0 0 1])
+    errorbar(nascent_exp(:,1),nascent_exp(:,2),nascent_exp(:,3),'o','Color',[54 100 139]/255)
     hold on 
-    errorbar(nascent_exp(:,1),nascent_exp(:,4),nascent_exp(:,5),'*','Color',[0 .5 ...
-                        0])
-    errorbar(nascent_exp(:,1),nascent_exp(:,6),nascent_exp(:,7),'*','Color',[1 0 ...
-                        0 ])
+    errorbar(nascent_exp(:,1),nascent_exp(:,4),nascent_exp(:,5),'^','Color',[135 206 255]/255)
+    errorbar(nascent_exp(:,1),nascent_exp(:,6),nascent_exp(:,7),'*','Color',[79 148 205]/255)
 
     plot(times,simData_nascent)
     hold off;
     xlim([0 120])
-    ylim([0 1.2])
-
+    ylim([0 2.0])
+    xlabel('Time (min)'); ylabel('Nascent mRNA (a.u.)')
+    
     subplot(2,2,2)
-    errorbar(mRNA_exp(:,1),mRNA_exp(:,2),mRNA_exp(:,3),'*','Color',[0 0 1])
+    errorbar(mRNA_exp(:,1),mRNA_exp(:,2),mRNA_exp(:,3),'o','Color',[54 100 139]/255)
     hold on 
-    errorbar(mRNA_exp(:,1),mRNA_exp(:,4),mRNA_exp(:,5),'*','Color',[0 .5 ...
-                        0])
-    errorbar(mRNA_exp(:,1),mRNA_exp(:,6),mRNA_exp(:,7),'*','Color',[1 0 ...
-                        0 ])
+    errorbar(mRNA_exp(:,1),mRNA_exp(:,4),mRNA_exp(:,5),'^','Color',[135 206 255]/255)
+    errorbar(mRNA_exp(:,1),mRNA_exp(:,6),mRNA_exp(:,7),'*','Color',[79 148 205]/255)
 
     plot(times,simData_mRNA)
     hold off
     xlim([0 120])
-    
+    xlabel('Time (min)'); ylabel('Mature mRNA (a.u.)')
     subplot(2,2,3)
-    errorbar(proTNF_exp(:,1),proTNF_exp(:,2),proTNF_exp(:,3),'*','Color',[0 0 1])
+    errorbar(proTNF_exp(:,1),proTNF_exp(:,2),proTNF_exp(:,3),'o','Color',[54 100 139]/255)
     hold on 
-    errorbar(proTNF_exp(:,1),proTNF_exp(:,4),proTNF_exp(:,5),'*','Color',[0 .5 ...
-                        0])
-    errorbar(proTNF_exp(:,1),proTNF_exp(:,6),proTNF_exp(:,7),'*','Color',[1 0 ...
-                        0 ])
+    errorbar(proTNF_exp(:,1),proTNF_exp(:,4),proTNF_exp(:,5),'^','Color',[135 206 255]/255)
+    errorbar(proTNF_exp(:,1),proTNF_exp(:,6),proTNF_exp(:,7),'*','Color',[79 148 205]/255)
 
     plot(times,simData_proTNF)
     hold off
     xlim([0 120])
-    
+    xlabel('Time (min)'); ylabel('ProTNF (a.u.)')
     subplot(2,2,4)
-    errorbar(secTNF_exp(:,1),secTNF_exp(:,2),secTNF_exp(:,3),'*','Color',[0 0 1])
+    errorbar(secTNF_exp(:,1),secTNF_exp(:,2),secTNF_exp(:,3),'o','Color',[54 100 139]/255)
     hold on 
-    errorbar(secTNF_exp(:,1),secTNF_exp(:,4),secTNF_exp(:,5),'*','Color',[0 .5 ...
-                        0])
-    errorbar(secTNF_exp(:,1),secTNF_exp(:,6),secTNF_exp(:,7),'*','Color',[1 0 ...
-                        0 ])
+    errorbar(secTNF_exp(:,1),secTNF_exp(:,4),secTNF_exp(:,5),'^','Color',[135 206 255]/255)
+    errorbar(secTNF_exp(:,1),secTNF_exp(:,6),secTNF_exp(:,7),'*','Color',[79 148 205]/255)
 
     plot(times,simData_secTNF)
+    xlabel('Time (min)'); ylabel('secTNF (a.u.)')
     hold off
     xlim([0 120])
 

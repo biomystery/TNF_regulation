@@ -1,21 +1,40 @@
+clear;
+set(0,'DefaultAxesColorOrder',[54 100 139; 135 206 255;79 148 205]/255)
 % read data from R 
 addpath('../../src/')
 
-%p = log10([0.5 0.6 4.5 1.5 3]);
+parMatirx = [
+    0.65 0.001 10 ;% km_tr
+    0.4 0.1 1; % k_pr
+    4 2 5; % fold_pr_mko 
+    1.5 1 2; %fold_pr_tko
+    2 1 3; % fold_kmtr_mko 
+    1 0.001 100; % tl 
+    3.5 1 5; %fold_tl_tko
+    5 1 10; % fold_sec_tko 
+    1 .001 100; % k_sec
+    0.5 0.001 1; % kdeg_p
+    ];
 
-for i = 1:10
-    p = parsFinal;
-    %ub = log10([ 1 1 100 100 6 ]); % V_tr, Km_tr, k_pr, pr_fold
-    %lb = log10([ 0.05 0.01 0.01 0.01 0.5]);
-    ub = p + log10(5) ; lb =p - log10(5); 
-    options =optimset('PlotFcns',{@optimplotx,@optimplotfunccount,@optimplotfirstorderopt,@optimplotstepsize,@optimplotresnorm },...
-                      'TolFun',1e-10,'TolX',1e-10); 
+pstart = log10(parMatirx(:,1));
+lb = log10(parMatirx(:,2));
+ub = log10(parMatirx(:,3));
 
-    [parsFinal,resnorm,residual,~,~,~,jacobian] = lsqnonlin(@ ...
-                                                      calScore,p,lb, ...
-                                                      ub,options);
-    chisq = resnorm/(numel(residual)-numel(p)-1); 
-    save fitCust2_4.mat
 
-end 
+options = saoptimset('PlotFcns',{@saplotbestx,@saplottemperature,@ ...
+                    saplotf,@saplotstopping,@saplotbestf});
 
+options = saoptimset(options,'TemperatureFcn',@temperaturefast);
+options = saoptimset(options,'ReannealInterval',50);
+options = saoptimset(options,'Display','iter','DisplayInterval',400);
+options = saoptimset(options,'TolFun',1e-5);
+
+[x,fval,exitFlag,output] = simulannealbnd(@objectFun, pstart,lb,ub, ...
+                                          options)
+
+fprintf('The number of iterations was : %d\n', output.iterations);
+fprintf('The number of function evaluations was : %d\n', output.funccount);
+fprintf('The best function value found was : %g\n', fval);
+
+
+save optim.mat
