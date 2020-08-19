@@ -1,6 +1,6 @@
 Compuational modeling regulation of TNF cytokine secretion
 ===========================================================
- Model's codes for paper (Gene & Dev. 2014, v28, pg2120, **Network dynamics determine the autocrine and paracrine signaling functions of TNF** ), which simulated TNF regulation in LPS, CpG and PIC treatement.
+ Model's codes for paper (Gene & Dev. 2014, v28, pg2120, [Network dynamics determine the autocrine and paracrine signaling functions of TNF](http://genesdev.cshlp.org/content/28/19/2120.short) , which simulated TNF regulation in LPS, CpG and PIC treatement.
 
 ## Results ##
 
